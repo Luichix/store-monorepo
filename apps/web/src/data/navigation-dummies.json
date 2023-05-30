@@ -1,0 +1,121 @@
+{
+  "categories": [
+    {
+      "id": "women",
+      "name": "Mujeres",
+      "featured": [
+        {
+          "name": "Nuevas llegadas",
+          "href": "#",
+          "imageSrc": "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
+          "imageAlt": "Modelos sentados de espaldas, usando camiseta básica en negro y blanco roto."
+        },
+        {
+          "name": "Camisetas básicas",
+          "href": "#",
+          "imageSrc": "https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg",
+          "imageAlt": "Primer plano de un paquete de camisetas básicas en colores blanco roto, ocre, oliva y negro."
+        }
+      ],
+      "sections": [
+        {
+          "id": "clothing",
+          "name": "Ropa",
+          "items": [
+            { "name": "Tops", "href": "#" },
+            { "name": "Vestidos", "href": "#" },
+            { "name": "Pantalones", "href": "#" },
+            { "name": "Denim", "href": "#" },
+            { "name": "Suéteres", "href": "#" },
+            { "name": "Camisetas", "href": "#" },
+            { "name": "Chaquetas", "href": "#" },
+            { "name": "Ropa deportiva", "href": "#" },
+            { "name": "Ver todo", "href": "#" }
+          ]
+        },
+        {
+          "id": "accessories",
+          "name": "Accesorios",
+          "items": [
+            { "name": "Relojes", "href": "#" },
+            { "name": "Carteras", "href": "#" },
+            { "name": "Bolsos", "href": "#" },
+            { "name": "Gafas de sol", "href": "#" },
+            { "name": "Sombreros", "href": "#" },
+            { "name": "Cinturones", "href": "#" }
+          ]
+        },
+        {
+          "id": "brands",
+          "name": "Marcas",
+          "items": [
+            { "name": "Full Nelson", "href": "#" },
+            { "name": "My Way", "href": "#" },
+            { "name": "Re-Arranged", "href": "#" },
+            { "name": "Falsificación", "href": "#" },
+            { "name": "Pareja significativa", "href": "#" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "men",
+      "name": "Hombres",
+      "featured": [
+        {
+          "name": "Nuevas llegadas",
+          "href": "#",
+          "imageSrc": "https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg",
+          "imageAlt": "Top con cordón elástico y acolchado interior texturizado."
+        },
+        {
+          "name": "Camisetas de arte",
+          "href": "#",
+          "imageSrc": "https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg",
+          "imageAlt": "Tres camisetas en gris, blanco y azul dispuestas en una mesa con el mismo dibujo de manos y formas superpuestas en el frente de la camiseta."
+        }
+      ],
+      "sections": [
+        {
+          "id": "clothing",
+          "name": "Ropa",
+          "items": [
+            { "name": "Tops", "href": "#" },
+            { "name": "Pantalones", "href": "#" },
+            { "name": "Suéteres", "href": "#" },
+            { "name": "Camisetas", "href": "#" },
+            { "name": "Chaquetas", "href": "#" },
+            { "name": "Ropa deportiva", "href": "#" },
+            { "name": "Ver todo", "href": "#" }
+          ]
+        },
+        {
+          "id": "accessories",
+          "name": "Accesorios",
+          "items": [
+            { "name": "Relojes", "href": "#" },
+            { "name": "Carteras", "href": "#" },
+            { "name": "Bolsos", "href": "#" },
+            { "name": "Gafas de sol", "href": "#" },
+            { "name": "Sombreros", "href": "#" },
+            { "name": "Cinturones", "href": "#" }
+          ]
+        },
+        {
+          "id": "brands",
+          "name": "Marcas",
+          "items": [
+            { "name": "Re-Arranged", "href": "#" },
+            { "name": "Falsificación", "href": "#" },
+            { "name": "Full Nelson", "href": "#" },
+            { "name": "My Way", "href": "#" }
+          ]
+        }
+      ]
+    }
+  ],
+  "pages": [
+    { "name": "Nosotros", "href": "#" },
+    { "name": "Historias", "href": "#" }
+  ]
+}

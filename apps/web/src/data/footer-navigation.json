@@ -1,0 +1,28 @@
+{
+  "shop": [
+    { "name": "Bolsos", "href": "#" },
+    { "name": "Camisetas", "href": "#" },
+    { "name": "Objetos", "href": "#" },
+    { "name": "Artículos para el hogar", "href": "#" },
+    { "name": "Accesorios", "href": "#" }
+  ],
+  "company": [
+    { "name": "Quiénes somos", "href": "#" },
+    { "name": "Sostenibilidad", "href": "#" },
+    { "name": "Prensa", "href": "#" },
+    { "name": "Carreras", "href": "#" },
+    { "name": "Términos y condiciones", "href": "#" },
+    { "name": "Privacidad", "href": "#" }
+  ],
+  "account": [
+    { "name": "Administrar cuenta", "href": "#" },
+    { "name": "Devoluciones e intercambios", "href": "#" },
+    { "name": "Canjear una tarjeta de regalo", "href": "#" }
+  ],
+  "connect": [
+    { "name": "Contáctanos", "href": "#" },
+    { "name": "Twitter", "href": "#" },
+    { "name": "Instagram", "href": "#" },
+    { "name": "Pinterest", "href": "#" }
+  ]
+}
