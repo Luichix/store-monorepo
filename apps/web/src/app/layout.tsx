@@ -1,4 +1,7 @@
 import 'ui/styles.css';
+import Footer from '../components/Footer';
+import MobileNavigation from '../components/MobileNavigation';
+import Navigation from '../components/Navigation';
 
 export default function RootLayout({
   children,
@@ -7,7 +10,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {/* Mobile menu */}
+        <MobileNavigation />
+        <Navigation />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
