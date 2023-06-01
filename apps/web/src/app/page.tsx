@@ -15,12 +15,8 @@
 */
 
 import favorites from '../data/favorities-dummies.json';
-import Navigation from '../components/Navigation';
-import Link from 'next/link';
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
+import Link from 'next/link';
 
 export default function Example() {
   return (
