@@ -36,6 +36,7 @@ import {
   FunnelIcon,
   StarIcon,
 } from '@heroicons/react/20/solid';
+import Image from 'next/image';
 
 const filters = {
   price: [
@@ -163,8 +164,8 @@ export default function Example() {
             Workspace
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-base text-gray-500">
-            The secret to a tidy desk? Don't get rid of anything, just put it in
-            really really nice looking containers.
+            The secret to a tidy desk? Don&apos;t get rid of anything, just put
+            it in really really nice looking containers.
           </p>
         </div>
 
@@ -373,9 +374,11 @@ export default function Example() {
                 className="group relative border-b border-r border-gray-200 p-4 sm:p-6"
               >
                 <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-200 group-hover:opacity-75">
-                  <img
+                  <Image
                     src={product.imageSrc}
                     alt={product.imageAlt}
+                    width={192}
+                    height={192}
                     className="h-full w-full object-cover object-center"
                   />
                 </div>

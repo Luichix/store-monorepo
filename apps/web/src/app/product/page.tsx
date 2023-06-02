@@ -36,6 +36,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { StarIcon } from '@heroicons/react/20/solid';
+import Image from 'next/image';
 
 const navigation = {
   categories: [
@@ -345,9 +346,11 @@ export default function Example() {
                         <>
                           <span className="sr-only">{image.name}</span>
                           <span className="absolute inset-0 overflow-hidden rounded-md">
-                            <img
+                            <Image
                               src={image.src}
                               alt=""
+                              width={96}
+                              height={130}
                               className="h-full w-full object-cover object-center"
                             />
                           </span>
@@ -368,9 +371,11 @@ export default function Example() {
               <Tab.Panels className="aspect-h-1 aspect-w-1 w-full">
                 {product.images.map((image) => (
                   <Tab.Panel key={image.id}>
-                    <img
+                    <Image
                       src={image.src}
                       alt={image.alt}
+                      width={672}
+                      height={672}
                       className="h-full w-full object-cover object-center sm:rounded-lg"
                     />
                   </Tab.Panel>
@@ -556,9 +561,11 @@ export default function Example() {
                 <div key={product.id}>
                   <div className="relative">
                     <div className="relative h-72 w-full overflow-hidden rounded-lg">
-                      <img
+                      <Image
                         src={product.imageSrc}
                         alt={product.imageAlt}
+                        width={288}
+                        height={288}
                         className="h-full w-full object-cover object-center"
                       />
                     </div>

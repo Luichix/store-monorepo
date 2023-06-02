@@ -18,6 +18,7 @@ import { Dialog, Tab, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 import navigation from '../data/navigation-dummies.json';
+import Image from 'next/image';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -97,7 +98,9 @@ export default function Navigation() {
                             className="group relative text-sm"
                           >
                             <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                              <img
+                              <Image
+                                width={100}
+                                height={100}
                                 src={item.imageSrc}
                                 alt={item.imageAlt}
                                 className="object-cover object-center"
@@ -184,7 +187,9 @@ export default function Navigation() {
 
               <div className="border-t border-gray-200 px-4 py-6">
                 <a href="#" className="-m-2 flex items-center p-2">
-                  <img
+                  <Image
+                    width={20}
+                    height={20}
                     src="/svg/nicaragua-flag.svg"
                     alt=""
                     className="block h-auto w-5 flex-shrink-0"

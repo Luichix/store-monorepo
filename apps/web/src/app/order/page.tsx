@@ -14,6 +14,8 @@
   ```
 */
 
+import Image from 'next/image';
+
 const products = [
   {
     id: 1,
@@ -87,9 +89,11 @@ export default function Example() {
               >
                 <div className="sm:col-span-4 md:col-span-5 md:row-span-2 md:row-end-2">
                   <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-50">
-                    <img
+                    <Image
                       src={product.imageSrc}
                       alt={product.imageAlt}
+                      width={488}
+                      height={488}
                       className="object-cover object-center"
                     />
                   </div>

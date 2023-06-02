@@ -19,6 +19,7 @@ import {
   QuestionMarkCircleIcon,
   XMarkIcon as XMarkIconMini,
 } from '@heroicons/react/20/solid';
+import Image from 'next/image';
 
 const products = [
   {
@@ -93,9 +94,11 @@ export default function Example() {
               {products.map((product, productIdx) => (
                 <li key={product.id} className="flex py-6 sm:py-10">
                   <div className="flex-shrink-0">
-                    <img
+                    <Image
                       src={product.imageSrc}
                       alt={product.imageAlt}
+                      width={192}
+                      height={192}
                       className="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48"
                     />
                   </div>
@@ -273,9 +276,11 @@ export default function Example() {
             {relatedProducts.map((relatedProduct) => (
               <div key={relatedProduct.id} className="group relative">
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-80">
-                  <img
+                  <Image
                     src={relatedProduct.imageSrc}
                     alt={relatedProduct.imageAlt}
+                    width={192}
+                    height={192}
                     className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                   />
                 </div>

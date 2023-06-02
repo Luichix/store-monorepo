@@ -14,6 +14,7 @@
   ```
 */
 
+import Image from 'next/image';
 import favorites from '../data/favorities-dummies.json';
 
 import Link from 'next/link';
@@ -49,14 +50,18 @@ export default function Example() {
                     <div className="flex items-center space-x-6 lg:space-x-8">
                       <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                         <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
-                          <img
+                          <Image
+                            width={100}
+                            height={100}
                             src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
                             alt=""
                             className="h-full w-full object-cover object-center"
                           />
                         </div>
                         <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
+                          <Image
+                            width={100}
+                            height={100}
                             src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-02.jpg"
                             alt=""
                             className="h-full w-full object-cover object-center"
@@ -65,21 +70,27 @@ export default function Example() {
                       </div>
                       <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                         <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
+                          <Image
+                            width={100}
+                            height={100}
                             src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-03.jpg"
                             alt=""
                             className="h-full w-full object-cover object-center"
                           />
                         </div>
                         <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
+                          <Image
+                            width={100}
+                            height={100}
                             src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-04.jpg"
                             alt=""
                             className="h-full w-full object-cover object-center"
                           />
                         </div>
                         <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
+                          <Image
+                            width={100}
+                            height={100}
                             src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-05.jpg"
                             alt=""
                             className="h-full w-full object-cover object-center"
@@ -88,14 +99,18 @@ export default function Example() {
                       </div>
                       <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                         <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
+                          <Image
+                            width={100}
+                            height={100}
                             src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-06.jpg"
                             alt=""
                             className="h-full w-full object-cover object-center"
                           />
                         </div>
                         <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
+                          <Image
+                            width={100}
+                            height={100}
                             src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg"
                             alt=""
                             className="h-full w-full object-cover object-center"
@@ -140,7 +155,9 @@ export default function Example() {
 
             <div className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-6 lg:gap-8">
               <div className="group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-h-1 sm:aspect-w-1 sm:row-span-2">
-                <img
+                <Image
+                  width={592}
+                  height={592}
                   src="https://tailwindui.com/img/ecommerce-images/home-page-03-featured-category.jpg"
                   alt="Two models wearing women's black cotton crewneck tee and off-white cotton crewneck tee."
                   className="object-cover object-center group-hover:opacity-75"
@@ -164,7 +181,9 @@ export default function Example() {
                 </div>
               </div>
               <div className="group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-none sm:relative sm:h-full">
-                <img
+                <Image
+                  width={592}
+                  height={592}
                   src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg"
                   alt="Wooden shelf with gray and olive drab green baseball caps, next to wooden clothes hanger with sweaters."
                   className="object-cover object-center group-hover:opacity-75 sm:absolute sm:inset-0 sm:h-full sm:w-full"
@@ -188,7 +207,9 @@ export default function Example() {
                 </div>
               </div>
               <div className="group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-none sm:relative sm:h-full">
-                <img
+                <Image
+                  width={592}
+                  height={592}
                   src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
                   alt="Walnut desk organizer set with white modular trays, next to porcelain mug on wooden desk."
                   className="object-cover object-center group-hover:opacity-75 sm:absolute sm:inset-0 sm:h-full sm:w-full"
@@ -229,7 +250,9 @@ export default function Example() {
         <section aria-labelledby="cause-heading">
           <div className="relative bg-gray-800 px-6 py-32 sm:px-12 sm:py-40 lg:px-16">
             <div className="absolute inset-0 overflow-hidden">
-              <img
+              <Image
+                width={1720}
+                height={860}
                 src="https://tailwindui.com/img/ecommerce-images/home-page-03-feature-section-full-width.jpg"
                 alt=""
                 className="h-full w-full object-cover object-center"
@@ -286,7 +309,9 @@ export default function Example() {
               {favorites.map((favorite) => (
                 <div key={favorite.id} className="group relative">
                   <div className="h-96 w-full overflow-hidden rounded-lg sm:aspect-h-3 sm:aspect-w-2 group-hover:opacity-75 sm:h-auto">
-                    <img
+                    <Image
+                      width={560}
+                      height={640}
                       src={favorite.imageSrc}
                       alt={favorite.imageAlt}
                       className="h-full w-full object-cover object-center"
@@ -342,7 +367,9 @@ export default function Example() {
                     <div className="ml-24 flex min-w-max space-x-6 sm:ml-3 lg:space-x-8">
                       <div className="flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
                         <div className="flex-shrink-0">
-                          <img
+                          <Image
+                            width={256}
+                            height={256}
                             className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
                             src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg"
                             alt=""
@@ -350,7 +377,9 @@ export default function Example() {
                         </div>
 
                         <div className="mt-6 flex-shrink-0 sm:mt-0">
-                          <img
+                          <Image
+                            width={256}
+                            height={256}
                             className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
                             src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
                             alt=""
@@ -359,7 +388,9 @@ export default function Example() {
                       </div>
                       <div className="flex space-x-6 sm:-mt-20 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
                         <div className="flex-shrink-0">
-                          <img
+                          <Image
+                            width={256}
+                            height={256}
                             className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
                             src="https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-01.jpg"
                             alt=""
@@ -367,7 +398,9 @@ export default function Example() {
                         </div>
 
                         <div className="mt-6 flex-shrink-0 sm:mt-0">
-                          <img
+                          <Image
+                            width={256}
+                            height={256}
                             className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
                             src="https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-02.jpg"
                             alt=""
@@ -376,7 +409,9 @@ export default function Example() {
                       </div>
                       <div className="flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
                         <div className="flex-shrink-0">
-                          <img
+                          <Image
+                            width={256}
+                            height={256}
                             className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
                             src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg"
                             alt=""
@@ -384,7 +419,9 @@ export default function Example() {
                         </div>
 
                         <div className="mt-6 flex-shrink-0 sm:mt-0">
-                          <img
+                          <Image
+                            width={256}
+                            height={256}
                             className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
                             src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
                             alt=""

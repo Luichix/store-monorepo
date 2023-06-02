@@ -1,26 +1,6 @@
 'use client';
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-import { Fragment } from 'react';
-import { ChevronRightIcon, ChevronUpIcon } from '@heroicons/react/20/solid';
-import { Popover, Transition } from '@headlessui/react';
-import {
-  CheckCircleIcon,
-  ChevronDownIcon,
-  TrashIcon,
-} from '@heroicons/react/20/solid';
+import Image from 'next/image';
+import { TrashIcon } from '@heroicons/react/20/solid';
 const steps = [
   { name: 'Cart', href: '#', status: 'complete' },
   { name: 'Billing Information', href: '#', status: 'current' },
@@ -73,9 +53,11 @@ export default function Example() {
                 {products.map((product) => (
                   <li key={product.id} className="flex px-4 py-6 sm:px-6">
                     <div className="flex-shrink-0">
-                      <img
+                      <Image
                         src={product.imageSrc}
                         alt={product.imageAlt}
+                        width={80}
+                        height={80}
                         className="w-20 rounded-md"
                       />
                     </div>
@@ -436,7 +418,7 @@ export default function Example() {
                 Continue
               </button>
               <p className="mt-4 text-center text-sm text-gray-500 sm:mt-0 sm:text-left">
-                You won't be charged until the next step.
+                You won&apos;t be charged until the next step.
               </p>
             </div>
           </div>

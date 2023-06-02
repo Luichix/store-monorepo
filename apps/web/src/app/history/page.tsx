@@ -21,6 +21,7 @@ import {
   ShoppingBagIcon,
 } from '@heroicons/react/24/outline';
 import { CheckCircleIcon } from '@heroicons/react/20/solid';
+import Image from 'next/image';
 
 const orders = [
   {
@@ -206,9 +207,11 @@ export default function Example() {
                       <li key={product.id} className="p-4 sm:p-6">
                         <div className="flex items-center sm:items-start">
                           <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg bg-gray-200 sm:h-40 sm:w-40">
-                            <img
+                            <Image
                               src={product.imageSrc}
                               alt={product.imageAlt}
+                              width={80}
+                              height={80}
                               className="h-full w-full object-cover object-center"
                             />
                           </div>
