@@ -2,6 +2,6 @@ module.exports = {
   reactStrictMode: true,
   transpilePackages: ['ui'],
   images: {
-    domains: ['tailwindui.com'],
+    domains: ['tailwindui.com', 'images.unsplash.com'],
   },
 };

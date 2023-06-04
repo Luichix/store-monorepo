@@ -1,30 +1,17 @@
 'use client';
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
+
 import { Fragment, useState } from 'react';
 import { Dialog, Tab, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
-import navigation from '../data/navigation-dummies.json';
+import navigation from '@/data/navigation-dummies.json';
 import Image from 'next/image';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Navigation() {
+export const MobileNavigation = () => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -206,4 +193,4 @@ export default function Navigation() {
       </Dialog>
     </Transition.Root>
   );
-}
+};

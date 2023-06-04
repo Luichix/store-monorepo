@@ -8,7 +8,7 @@ import {
   ShoppingBagIcon,
 } from '@heroicons/react/24/outline';
 
-import navigation from '../data/navigation-dummies.json';
+import navigation from '@/data/navigation-dummies.json';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -16,7 +16,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-const Navigation = () => {
+export const Navigation = () => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -171,19 +171,19 @@ const Navigation = () => {
 
           <div className="ml-auto flex items-center">
             <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-              <a
-                href="#"
+              <Link
+                href="login"
                 className="text-sm font-medium text-gray-700 hover:text-gray-800"
               >
                 Ingresar
-              </a>
+              </Link>
               <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-              <a
-                href="#"
+              <Link
+                href="register"
                 className="text-sm font-medium text-gray-700 hover:text-gray-800"
               >
                 Crear cuenta
-              </a>
+              </Link>
             </div>
 
             <div className="hidden lg:ml-8 lg:flex">
@@ -232,5 +232,3 @@ const Navigation = () => {
     </nav>
   );
 };
-
-export default Navigation;

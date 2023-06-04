@@ -15,7 +15,7 @@
 */
 
 import Image from 'next/image';
-import favorites from '../data/favorities-dummies.json';
+import favorites from '@/data/favorities-dummies.json';
 
 import Link from 'next/link';
 

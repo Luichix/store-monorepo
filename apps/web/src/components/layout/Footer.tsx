@@ -1,6 +1,6 @@
-import footerNavigation from '../data/footer-navigation.json';
+import footerNavigation from '@/data/footer-navigation.json';
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <footer aria-labelledby="footer-heading" className="bg-white">
       <h2 id="footer-heading" className="sr-only">
@@ -114,5 +114,3 @@ const Footer = () => {
     </footer>
   );
 };
-
-export default Footer;

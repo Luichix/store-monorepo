@@ -114,8 +114,5 @@
       ]
     }
   ],
-  "pages": [
-    { "name": "Nosotros", "href": "#" },
-    { "name": "Historias", "href": "#" }
-  ]
+  "pages": [{ "name": "Nosotros", "href": "about" }]
 }
