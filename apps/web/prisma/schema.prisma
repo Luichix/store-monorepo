@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
+}
+
+type NotesAnswers {
+  answer   String
+  category String
+  intent   String
+  state    Boolean
+}
+
+model images {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  v           Int      @map("__v")
+  category    String
+  created_at  DateTime @db.Date
+  description String
+  imageUrl    String
+  item        String
+  price       Int
+  public_id   String
+  state       String
+  stock       Int
+}
+
+model notes {
+  id        String         @id @default(auto()) @map("_id") @db.ObjectId
+  v         Int?           @map("__v")
+  answers   NotesAnswers[]
+  content   String?
+  date      DateTime?      @db.Date
+  important Boolean?
+  language  String?
+  uid       String?
+  user      String?        @db.ObjectId
+}
+
+model users {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  v        Int?    @map("__v")
+  email    String
+  name     String
+  password String
+}
