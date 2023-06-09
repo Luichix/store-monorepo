@@ -8,7 +8,7 @@ export function Logotype(props) {
       y="0px"
       width="100%"
       viewBox="0 0 419 85"
-      enable-background="new 0 0 419 85"
+      enableBackground="new 0 0 419 85"
       {...props}
     >
       <path
@@ -352,7 +352,7 @@ export function Logomark(props) {
       y="0px"
       width="100%"
       viewBox="0 0 445 416"
-      enable-background="new 0 0 445 416"
+      enableBackground="new 0 0 445 416"
       space="preserve"
       aria-hidden="true"
       {...props}

@@ -1,10 +1,25 @@
+'use client';
 import Head from 'next/head';
 import Link from 'next/link';
 
 import { AuthLayout } from '@/components/layout';
 import { Button, TextField } from '@/components/common';
+import { signIn } from 'next-auth/react';
+import { useState } from 'react';
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onSubmit = async () => {
+    const result = await signIn('credentials', {
+      username: email,
+      password,
+      redirect: true,
+      callbackUrl: '/',
+    });
+  };
+
   return (
     <>
       <Head>
@@ -31,6 +46,8 @@ export default function Login() {
               type="email"
               autoComplete="email"
               required
+              value={email}
+              onChange={({ target }) => setEmail(target.value)}
             />
             <TextField
               label="Password"
@@ -39,9 +56,16 @@ export default function Login() {
               type="password"
               autoComplete="current-password"
               required
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
             />
           </div>
-          <Button type="submit" color="pink" className="mt-8 w-full">
+          <Button
+            onClick={onSubmit}
+            type="button"
+            color="pink"
+            className="mt-8 w-full"
+          >
             Sign in to account
           </Button>
         </form>

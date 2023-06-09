@@ -12,12 +12,17 @@ import navigation from '@/data/navigation-dummies.json';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { signIn, signOut, useSession } from 'next-auth/react';
+import { Logo } from '../common';
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 export const Navigation = () => {
   const [open, setOpen] = useState(false);
+
+  const { data: session } = useSession();
 
   return (
     <nav
@@ -40,12 +45,7 @@ export const Navigation = () => {
           <div className="ml-4 flex lg:ml-0">
             <Link href="#">
               <span className="sr-only">Your Company</span>
-              <Image
-                src="/images/logo.png"
-                alt="logotipo"
-                width={32}
-                height={32}
-              />
+              <Logo width={32} height={32} />
             </Link>
           </div>
 
@@ -171,19 +171,42 @@ export const Navigation = () => {
 
           <div className="ml-auto flex items-center">
             <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-              <Link
-                href="login"
-                className="text-sm font-medium text-gray-700 hover:text-gray-800"
-              >
-                Ingresar
-              </Link>
-              <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-              <Link
-                href="register"
-                className="text-sm font-medium text-gray-700 hover:text-gray-800"
-              >
-                Crear cuenta
-              </Link>
+              {session && session.user ? (
+                <>
+                  <Link
+                    href="login"
+                    className="text-sm font-medium text-gray-700 flex flex-col items-end hover:text-gray-800"
+                  >
+                    {session.user.name} &nbsp;
+                    <p className="text-xs  text-gray-400">
+                      {session.user.email}
+                    </p>
+                  </Link>
+                  <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
+                  <button
+                    onClick={() => signOut()}
+                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                  >
+                    Cerrar Session
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={() => signIn()}
+                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                  >
+                    Ingresar
+                  </button>
+                  <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
+                  <Link
+                    href="register"
+                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                  >
+                    Crear cuenta
+                  </Link>
+                </>
+              )}
             </div>
 
             <div className="hidden lg:ml-8 lg:flex">
