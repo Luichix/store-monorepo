@@ -2,7 +2,7 @@ module.exports = {
   reactStrictMode: true,
   transpilePackages: ['ui'],
   images: {
-    domains: ['tailwindui.com', 'images.unsplash.com'],
+    domains: ['tailwindui.com', 'images.unsplash.com', 'res.cloudinary.com'],
   },
   env: {
     FIREBASE_API_KEY:

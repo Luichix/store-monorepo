@@ -23,7 +23,6 @@ export const Navigation = () => {
   const [open, setOpen] = useState(false);
 
   const { data: session } = useSession();
-
   return (
     <nav
       aria-label="Top"
@@ -43,7 +42,7 @@ export const Navigation = () => {
 
           {/* Logo */}
           <div className="ml-4 flex lg:ml-0">
-            <Link href="#">
+            <Link href="/">
               <span className="sr-only">Your Company</span>
               <Logo width={32} height={32} />
             </Link>
@@ -174,7 +173,7 @@ export const Navigation = () => {
               {session && session.user ? (
                 <>
                   <Link
-                    href="login"
+                    href="profile"
                     className="text-sm font-medium text-gray-700 flex flex-col items-end hover:text-gray-800"
                   >
                     {session.user.name} &nbsp;
@@ -210,10 +209,7 @@ export const Navigation = () => {
             </div>
 
             <div className="hidden lg:ml-8 lg:flex">
-              <a
-                href="#"
-                className="flex items-center text-gray-700 hover:text-gray-800"
-              >
+              <div className="flex items-center text-gray-700 hover:text-gray-800">
                 <Image
                   className="block h-auto w-5 flex-shrink-0"
                   src="/svg/nicaragua-flag.svg"
@@ -223,15 +219,15 @@ export const Navigation = () => {
                 />
                 <span className="ml-3 block text-sm font-medium">NIO</span>
                 <span className="sr-only">, cambiar moneda</span>
-              </a>
+              </div>
             </div>
 
             {/* Search */}
             <div className="flex lg:ml-6">
-              <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
+              <div className="p-2 text-gray-400 hover:text-gray-500">
                 <span className="sr-only">Buscar</span>
                 <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-              </a>
+              </div>
             </div>
 
             {/* Cart */}

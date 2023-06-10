@@ -122,7 +122,7 @@ export default function Example() {
                 </div>
 
                 <Link
-                  href="colection"
+                  href="collection"
                   className="inline-block rounded-md border border-transparent bg-pink-500 px-8 py-3 text-center font-medium text-white hover:bg-cyan-600"
                 >
                   Colección de la tienda

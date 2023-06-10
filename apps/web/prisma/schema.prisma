@@ -7,18 +7,11 @@ datasource db {
   url      = env("MONGODB_URI")
 }
 
-type NotesAnswers {
-  answer   String
-  category String
-  intent   String
-  state    Boolean
-}
-
-model images {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  v           Int      @map("__v")
+model Items {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  v           Int         @map("__v")
   category    String
-  created_at  DateTime @db.Date
+  created_at  DateTime    @db.Date
   description String
   imageUrl    String
   item        String
@@ -26,24 +19,50 @@ model images {
   public_id   String
   state       String
   stock       Int
+  rating      Int
+  reviewCount Int
+  cart        Cart[]
+  OrderItem   OrderItem[]
 }
 
-model notes {
-  id        String         @id @default(auto()) @map("_id") @db.ObjectId
-  v         Int?           @map("__v")
-  answers   NotesAnswers[]
-  content   String?
-  date      DateTime?      @db.Date
-  important Boolean?
-  language  String?
-  uid       String?
-  user      String?        @db.ObjectId
-}
-
-model users {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
+model Users {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
   v        Int?    @map("__v")
   email    String
   name     String
   password String
+  cart     Cart[]
+  orders   Order[]
+}
+
+model Cart {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  v          Int?     @map("__v")
+  user       Users    @relation(fields: [userId], references: [id])
+  userId     String @db.ObjectId
+  items      Items   @relation(fields: [itemId], references: [id])
+  itemId    String @db.ObjectId
+  quantity   Int
+}
+
+
+model Order {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  v           Int?        @map("__v")
+  user        Users       @relation(fields: [userId], references: [id])
+  userId      String      @db.ObjectId
+  items       OrderItem[]
+  created_at  DateTime    @db.Date
+  totalAmount Int
+  status      String
+}
+
+model OrderItem {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  v        Int?   @map("__v")
+  order    Order  @relation(fields: [orderId], references: [id])
+  orderId  String @db.ObjectId
+  item    Items @relation(fields: [itemId], references: [id])
+  itemId  String @db.ObjectId
+  quantity Int
 }
