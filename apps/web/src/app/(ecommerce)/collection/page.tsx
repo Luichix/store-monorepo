@@ -1,86 +1,22 @@
-import { Fragment } from 'react';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import {
-  ChevronDownIcon,
-  FunnelIcon,
-  StarIcon,
-} from '@heroicons/react/20/solid';
 import Image from 'next/image';
-import { classNames } from '@/utils/classNames';
 import Filter from '@/components/common/Filter';
 import Link from 'next/link';
+import { fetchCollection } from '@/utils';
+import { CollectionProps, Item } from '@/types';
 
-const filters = {
-  price: [
-    { value: '0', label: '$0 - $25', checked: false },
-    { value: '25', label: '$25 - $50', checked: false },
-    { value: '50', label: '$50 - $75', checked: false },
-    { value: '75', label: '$75+', checked: false },
-  ],
-  color: [
-    { value: 'white', label: 'White', checked: false },
-    { value: 'beige', label: 'Beige', checked: false },
-    { value: 'blue', label: 'Blue', checked: true },
-    { value: 'brown', label: 'Brown', checked: false },
-    { value: 'green', label: 'Green', checked: false },
-    { value: 'purple', label: 'Purple', checked: false },
-  ],
-  size: [
-    { value: 'xs', label: 'XS', checked: false },
-    { value: 's', label: 'S', checked: true },
-    { value: 'm', label: 'M', checked: false },
-    { value: 'l', label: 'L', checked: false },
-    { value: 'xl', label: 'XL', checked: false },
-    { value: '2xl', label: '2XL', checked: false },
-  ],
-  category: [
-    { value: 'all-new-arrivals', label: 'All New Arrivals', checked: false },
-    { value: 'tees', label: 'Tees', checked: false },
-    { value: 'objects', label: 'Objects', checked: false },
-    { value: 'sweatshirts', label: 'Sweatshirts', checked: false },
-    { value: 'pants-and-shorts', label: 'Pants & Shorts', checked: false },
-  ],
-};
-const sortOptions = [
-  { name: 'Most Popular', href: '#', current: true },
-  { name: 'Best Rating', href: '#', current: false },
-  { name: 'Newest', href: '#', current: false },
-  { name: 'Price: Low to High', href: '#', current: false },
-  { name: 'Price: High to Low', href: '#', current: false },
-];
-
-async function getData() {
-  const res = await fetch('http://localhost:3000/api/collection');
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
-  // Recommendation: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data');
-  }
-
-  return res.json();
-}
-
-interface Products {
-  id: string;
-  v: number;
-  category: string;
-  created_at: string;
-  description: string;
-  imageUrl: string;
-  item: string;
-  price: number;
-  public_id: string;
-  state: string;
-  stock: number;
-  rating: number;
-  reviewCount: number;
-}
-
-export default async function Example() {
-  const products: Products[] = await getData();
+export default async function Collection({ searchParams }: CollectionProps) {
+  const products: Item[] = await fetchCollection({
+    section: searchParams.section || undefined,
+    category: searchParams.category || undefined,
+    gender: searchParams.gender || undefined,
+    size: searchParams.size || undefined,
+    color: searchParams.color || undefined,
+    material: searchParams.material || undefined,
+    style: searchParams.style || undefined,
+    brand: searchParams.brand || undefined,
+    price: searchParams.price || undefined,
+    state: searchParams.state || undefined,
+  });
   return (
     <div className="bg-white">
       <main className="pb-24">
@@ -121,35 +57,18 @@ export default async function Example() {
                     className="h-full w-full object-cover object-center"
                   />
                 </div>
-                <div className="pb-4 pt-10 text-center">
+                <div className="pb-4 pt-10 ">
                   <h3 className="text-sm font-medium text-gray-900">
                     <Link href={`collection/${product.id}`}>
                       <span aria-hidden="true" className="absolute inset-0" />
                       {product.item}
                     </Link>
                   </h3>
-                  <div className="mt-3 flex flex-col items-center">
-                    <p className="sr-only">{product.rating} out of 5 stars</p>
-                    <div className="flex items-center">
-                      {[0, 1, 2, 3, 4].map((rating) => (
-                        <StarIcon
-                          key={rating}
-                          className={classNames(
-                            product.rating > rating
-                              ? 'text-yellow-400'
-                              : 'text-gray-200',
-                            'h-5 w-5 flex-shrink-0'
-                          )}
-                          aria-hidden="true"
-                        />
-                      ))}
-                    </div>
-                    <p className="mt-1 text-sm text-gray-500">
-                      {product.reviewCount} reviews
-                    </p>
-                  </div>
+                  <p className="mt-1 text-sm text-gray-500">
+                    {product.description}
+                  </p>
                   <p className="mt-4 text-base font-medium text-gray-900">
-                    {product.price}
+                    C$ {product.price}
                   </p>
                 </div>
               </div>

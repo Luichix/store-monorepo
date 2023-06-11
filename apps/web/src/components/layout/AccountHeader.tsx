@@ -7,12 +7,7 @@ import { Logo } from '../common';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const navigation = [
-  { name: 'Home', href: '#' },
-  { name: 'Invoices', href: '#' },
-  { name: 'Clients', href: '#' },
-  { name: 'Expenses', href: '#' },
-];
+const navigation = [{ name: 'Home', href: '/' }];
 
 export const AccountHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

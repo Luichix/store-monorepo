@@ -7,23 +7,34 @@ datasource db {
   url      = env("MONGODB_URI")
 }
 
+
+
 model Items {
-  id          String      @id @default(auto()) @map("_id") @db.ObjectId
-  v           Int         @map("__v")
-  category    String
-  created_at  DateTime    @db.Date
-  description String
-  imageUrl    String
-  item        String
-  price       Int
-  public_id   String
-  state       String
-  stock       Int
-  rating      Int
-  reviewCount Int
-  cart        Cart[]
-  OrderItem   OrderItem[]
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
+  v            Int         @map("__v")
+  category     String
+  section      String      // Nueva adición para la sección o categoría específica
+  size         String?     // Talla del producto (opcional)
+  color        String?     // Color del producto (opcional)
+  material     String?     // Material del producto (opcional)
+  gender       String?     // Género al que se dirige el producto (opcional)
+  style        String?     // Estilo del producto (opcional)
+  brand        String?     // Marca del producto (opcional)
+  created_at   DateTime    @db.Date
+  description  String
+  imageUrl     String
+  item         String
+  price        Int
+  public_id    String
+  state        String
+  stock        Int
+  rating       Int
+  reviewCount  Int
+  cart         Cart[]
+  OrderItem    OrderItem[]
+
 }
+
 
 model Users {
   id       String  @id @default(auto()) @map("_id") @db.ObjectId

@@ -4,7 +4,7 @@ import { Fragment, useState } from 'react';
 import { Dialog, Tab, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
-import navigation from '@/data/navigation-dummies.json';
+import navigation from 'public/data/navigation-dummies.json';
 import Image from 'next/image';
 
 function classNames(...classes: string[]) {

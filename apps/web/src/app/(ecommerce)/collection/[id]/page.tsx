@@ -95,7 +95,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Example({ params }) {
+export default function Product({ params }) {
   const { id } = params;
 
   console.log(id);

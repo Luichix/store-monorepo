@@ -5,6 +5,51 @@ import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, FunnelIcon } from '@heroicons/react/20/solid';
 
+type Gender = 'M' | 'F';
+
+interface Section {
+  clothing?: Clothing[];
+  accessories?: Accesories[];
+  brand?: Brand[];
+}
+
+type Clothing =
+  | 'tops'
+  | 'dresses'
+  | 'pants'
+  | 'denim'
+  | 'sweaters'
+  | 'tshirts'
+  | 'jackets'
+  | 'sportswear';
+type Accesories =
+  | 'watches'
+  | 'portfolios'
+  | 'handbags'
+  | 'sunglasses'
+  | 'hats'
+  | 'belts';
+
+type Brand =
+  | 'fullnelson'
+  | 'my way'
+  | 'ReArranged'
+  | 'Falsification'
+  | 'significant couple';
+
+interface Filter {
+  filter: boolean;
+  gender: Gender;
+  section: Section;
+}
+
+const fill: Filter = {
+  filter: true,
+  gender: 'M',
+  section: {
+    clothing: ['tops', 'dresses'],
+  },
+};
 const filters = {
   price: [
     { value: '0', label: '$0 - $25', checked: false },

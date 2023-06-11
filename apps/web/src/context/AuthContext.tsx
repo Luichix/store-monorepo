@@ -11,7 +11,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import { auth } from '@/services/firebase'; // Importa la instancia de autenticación de firebaseApp.ts
+import { auth } from '@/lib/firebase'; // Importa la instancia de autenticación de firebaseApp.ts
 
 interface AuthContextType {
   auth: User | null;

@@ -1,4 +1,4 @@
-import footerNavigation from '@/data/footer-navigation.json';
+import footerNavigation from 'public/data/footer-navigation.json';
 
 export const Footer = () => {
   return (
