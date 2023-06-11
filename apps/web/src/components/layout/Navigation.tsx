@@ -14,15 +14,13 @@ import Link from 'next/link';
 
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { Logo } from '../common';
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
+import { classNames } from '@/utils/classNames';
 
 export const Navigation = () => {
   const [open, setOpen] = useState(false);
 
   const { data: session } = useSession();
+
   return (
     <nav
       aria-label="Top"

@@ -34,8 +34,8 @@ export async function fetchCollection(filters: FilterProps) {
   return data;
 }
 
-export async function fetchItem() {
-  const res = await fetch('http://localhost:3000/api/collection');
+export async function fetchItem(itemId: string) {
+  const res = await fetch(`http://localhost:3000/api/collection/${itemId}`);
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -47,6 +47,57 @@ export async function fetchItem() {
 
   return res.json();
 }
+export async function fetchCart({
+  id,
+  authorization,
+}: {
+  id: string;
+  authorization: string;
+}) {
+  const res = await fetch(`http://localhost:3000/api/user/${id}`, {
+    headers: {
+      authorization,
+      'Content-Type': 'application/json',
+    },
+  });
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+
+  // Recommendation: handle errors
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}
+
+// interface CartItemProps {
+//   userId: string;
+//   itemId: string;
+//   quantity: string;
+// }
+
+// export async function fetchCart(cartItem: CartItemProps) {
+//   // Set the required headers for the API request
+
+//   const headers: HeadersInit = {
+//     authorization: '',
+//   };
+
+//   const body = cartItem;
+
+//   // Set the required headers for the API request
+//   const response = await fetch('http://localhost:3000/api/cart ', {
+//     headers: headers,
+//     method: 'POST',
+//   });
+
+//   // Parse the response as JSON
+//   const result = await response.json();
+
+//   return result;
+// }
 
 /**
  * 

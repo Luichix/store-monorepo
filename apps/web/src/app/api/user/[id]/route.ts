@@ -15,19 +15,10 @@ export async function GET(
     );
   }
 
-  const userCart = await prisma.cart.findFirst({
+  const userCart = await prisma.cart.findMany({
     where: { userId: params.id },
     include: {
-      items: {
-        select: {
-          imageUrl: true,
-          description: true,
-          item: true,
-          category: true,
-          price: true,
-          stock: true,
-        },
-      },
+      items: true,
     },
   });
 
