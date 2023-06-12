@@ -221,8 +221,8 @@ export default async function Product({ params }) {
                 </h2>
 
                 <div className="divide-y divide-gray-200 border-t">
-                  {product.details.map((detail) => (
-                    <Details detail={detail} />
+                  {product.details.map((detail, index) => (
+                    <Details key={index} detail={detail} />
                   ))}
                 </div>
               </section>
