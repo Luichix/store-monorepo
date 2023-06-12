@@ -1,5 +1,7 @@
 import { FilterProps } from '@/types';
 
+const NEXT_URL = process.env.NEXTAUTH_URL;
+
 export async function fetchCollection(filters: FilterProps) {
   const {
     section,
@@ -14,7 +16,7 @@ export async function fetchCollection(filters: FilterProps) {
     state,
   } = filters;
 
-  const url = new URL('http://localhost:3000/api/collection');
+  const url = new URL(`${NEXT_URL}/api/collection`);
 
   // Agregar los parámetros de filtro a la URL
   if (section) url.searchParams.append('section', section);
@@ -35,7 +37,7 @@ export async function fetchCollection(filters: FilterProps) {
 }
 
 export async function fetchItem(itemId: string) {
-  const res = await fetch(`http://localhost:3000/api/collection/${itemId}`);
+  const res = await fetch(`${NEXT_URL}/api/collection/${itemId}`);
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -54,7 +56,7 @@ export async function fetchCart({
   id: string;
   authorization: string;
 }) {
-  const res = await fetch(`http://localhost:3000/api/user/${id}`, {
+  const res = await fetch(`${NEXT_URL}/api/user/${id}`, {
     headers: {
       authorization,
       'Content-Type': 'application/json',

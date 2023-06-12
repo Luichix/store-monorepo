@@ -27,10 +27,10 @@ const relatedProducts = [
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const { data: session } = useSession();
-
   useEffect(() => {
+    const URL = process.env.NEXT_PUBLIC_API_URL;
     if (session?.user?.accessToken) {
-      fetch(`http://localhost:3000/api/user/${session.user.id}`, {
+      fetch(`${URL}/user/${session.user.id}`, {
         headers: {
           authorization: session.user.accessToken,
           'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ export default function Cart() {
     cartItems.reduce((amount, item) => item.items.price + amount, 0);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white mt-10">
       <main className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           Carrito de Compras
@@ -233,7 +233,7 @@ export default function Cart() {
           <>None</>
         )}
         {/* Related products */}
-        <section aria-labelledby="related-heading" className="mt-24">
+        {/* <section aria-labelledby="related-heading" className="mt-24">
           <h2
             id="related-heading"
             className="text-lg font-medium text-gray-900"
@@ -272,7 +272,7 @@ export default function Cart() {
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
       </main>
     </div>
   );

@@ -1,0 +1,54 @@
+{
+  "stats": [
+    {
+      "label": "Amplia variedad de estilos para hombres y mujeres",
+      "value": "Tendencias únicas"
+    },
+    {
+      "label": "Dispuestos a colaborar con diseñadores locales.",
+      "value": "Creatividad inspirada"
+    },
+    {
+      "label": "Atención personalizada y amigable",
+      "value": "Experiencia satisfactoria"
+    }
+  ],
+  "values": [
+    {
+      "name": "Autenticidad",
+      "description": "Creemos en la importancia de ofrecer prendas auténticas y de calidad que reflejen el estilo y la cultura de Nicaragua. Nos esforzamos por ser fieles a nuestra identidad y valores en todo lo que hacemos."
+    },
+    {
+      "name": "Sostenibilidad",
+      "description": "Valoramos el medio ambiente y nos comprometemos a trabajar con proveedores y marcas que sigan prácticas sostenibles y éticas. Buscamos promover un enfoque consciente y responsable en la moda."
+    },
+    {
+      "name": "Atención al Cliente",
+      "description": "Nos enorgullece brindar una atención al cliente excepcional. Nos esforzamos por ofrecer un servicio personalizado y amigable, asegurando que cada cliente se sienta valorado y satisfecho en cada interacción."
+    },
+    {
+      "name": "Variedad y Estilo",
+      "description": "Nos apasiona ofrecer una amplia variedad de estilos y tendencias para satisfacer las necesidades y preferencias únicas de nuestros clientes. Queremos que encuentres prendas que te hagan sentir auténtico/a y seguro/a."
+    },
+    {
+      "name": "Calidad y Durabilidad",
+      "description": "Nos comprometemos a ofrecer prendas de alta calidad que sean duraderas y perduren en el tiempo. Valoramos la artesanía y seleccionamos cuidadosamente los materiales para garantizar la satisfacción de nuestros clientes."
+    },
+    {
+      "name": "Colaboración con la Comunidad",
+      "description": "Nos esforzamos por construir una comunidad en torno a la moda y el estilo en Nicaragua. Colaboramos con diseñadores y artesanos locales, y participamos en eventos y proyectos sociales que enriquecen nuestra comunidad."
+    }
+  ],
+  "team": [
+    {
+      "name": "Luis Reynaldo",
+      "role": "Senior Developer",
+      "imageUrl": "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
+    },
+    {
+      "name": "Ada Francis",
+      "role": "Customer Experience",
+      "imageUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
+    }
+  ]
+}

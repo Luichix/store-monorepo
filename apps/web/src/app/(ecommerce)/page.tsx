@@ -1,29 +1,13 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
-
 import Image from 'next/image';
 import favorites from 'public/data/favorities-dummies.json';
-
 import Link from 'next/link';
 
-export default function Example() {
+export default function Home() {
   return (
     <div className="bg-white">
       <p className=" flex h-10 text-center items-center justify-center bg-pink-500 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
-        Obten envió gratuito en pedidos superiores a C$ 750
+        ¡Oferta exclusiva! Obtén un 20% de descuento en tu primera compra con el
+        código &apos;BIENVENIDO2023&apos;
       </p>
       <header className="relative overflow-hidden">
         {/* Hero section */}
@@ -31,12 +15,12 @@ export default function Example() {
           <div className="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
             <div className="sm:max-w-lg">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                Los estilos de verano finalmente están aquí.
+                ¡Descubre nuestra colección única en Nicaragua!
               </h1>
               <p className="mt-4 text-xl text-gray-500">
-                Este año, nuestra nueva colección de verano te protegerá del
-                elementos duros de un mundo al que no le importa si vives o
-                mueres.
+                Explora nuestro catálogo de prendas de alta calidad para
+                hombres, mujeres. Sumérgete en el y encuentra las piezas que te
+                harán destacar.
               </p>
             </div>
             <div>
@@ -125,7 +109,7 @@ export default function Example() {
                   href="collection"
                   className="inline-block rounded-md border border-transparent bg-pink-500 px-8 py-3 text-center font-medium text-white hover:bg-cyan-600"
                 >
-                  Colección de la tienda
+                  Ir a la Colección
                 </Link>
               </div>
             </div>
@@ -169,10 +153,10 @@ export default function Example() {
                 <div className="flex items-end p-6">
                   <div>
                     <h3 className="font-semibold text-white">
-                      <a href="#">
+                      <Link href="collection?state=new">
                         <span className="absolute inset-0" />
-                        Los recién llegados
-                      </a>
+                        Todo lo nuevo
+                      </Link>
                     </h3>
                     <p aria-hidden="true" className="mt-1 text-sm text-white">
                       Compra ahora
@@ -195,10 +179,10 @@ export default function Example() {
                 <div className="flex items-end p-6 sm:absolute sm:inset-0">
                   <div>
                     <h3 className="font-semibold text-white">
-                      <a href="#">
+                      <Link href="collection?section=accesories">
                         <span className="absolute inset-0" />
                         Accessorios
-                      </a>
+                      </Link>
                     </h3>
                     <p aria-hidden="true" className="mt-1 text-sm text-white">
                       Compra ahora
@@ -221,10 +205,10 @@ export default function Example() {
                 <div className="flex items-end p-6 sm:absolute sm:inset-0">
                   <div>
                     <h3 className="font-semibold text-white">
-                      <a href="#">
+                      <Link href="collection?style=sportswear">
                         <span className="absolute inset-0" />
-                        Espacio de trabajo
-                      </a>
+                        Estilos deportivos
+                      </Link>
                     </h3>
                     <p aria-hidden="true" className="mt-1 text-sm text-white">
                       Compra ahora
@@ -267,21 +251,20 @@ export default function Example() {
                 id="cause-heading"
                 className="text-3xl font-bold tracking-tight text-white sm:text-4xl"
               >
-                Pensamiento a largo plazo
+                ¡Descubre y sumérgete en nuestro mundo!
               </h2>
               <p className="mt-3 text-xl text-white">
-                Estamos comprometidos con la responsabilidad, la sostenibilidad
-                y la ética. fabricación. Nuestro enfoque a pequeña escala nos
-                permite centrarnos en calidad y reducir nuestro impacto. Estamos
-                haciendo todo lo posible para retrasar el inevitable muerte por
-                calor del universo.
+                Conoce la pasión y el compromiso que hay detrás de cada prenda,
+                quiénes somos y qué nos impulsa a diseñar este espacio para ti.
+                Estamos emocionados en compartir los valores que nos inspiran y
+                cómo nos esforzamos por superar tus expectativas
               </p>
-              <a
-                href="#"
+              <Link
+                href="about"
                 className="mt-8 block w-full rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto"
               >
-                Lea nuestra historia
-              </a>
+                Conocer más acerca de nosotros
+              </Link>
             </div>
           </div>
         </section>
@@ -296,13 +279,13 @@ export default function Example() {
               >
                 Nuestros favoritos
               </h2>
-              <a
-                href="#"
+              <Link
+                href="collection?state=favorite"
                 className="hidden text-sm font-semibold text-pink-500 hover:text-cyan-600 sm:block"
               >
                 Explorar todos los favoritos
                 <span aria-hidden="true"> &rarr;</span>
-              </a>
+              </Link>
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-y-10 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-0 lg:gap-x-8">
@@ -329,13 +312,13 @@ export default function Example() {
             </div>
 
             <div className="mt-6 sm:hidden">
-              <a
-                href="#"
+              <Link
+                href="collection?state=favorite"
                 className="block text-sm font-semibold text-pink-500 hover:text-cyan-600"
               >
                 Explorar todos los favoritos
                 <span aria-hidden="true"> &rarr;</span>
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -351,15 +334,18 @@ export default function Example() {
                       id="sale-heading"
                       className="text-4xl font-bold tracking-tight text-white md:text-5xl"
                     >
-                      Ultimas existencias.
+                      Ofertas de liquidación.
                       <br />
                       Hasta 50% de descuento.
                     </h2>
                     <div className="mt-6 text-base">
-                      <a href="#" className="font-semibold text-white">
+                      <Link
+                        href="collection?state=clearence"
+                        className="font-semibold text-white"
+                      >
                         Ir a la compra
                         <span aria-hidden="true"> &rarr;</span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
 

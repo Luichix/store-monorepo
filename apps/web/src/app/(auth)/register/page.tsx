@@ -8,24 +8,24 @@ export default function Register() {
   return (
     <>
       <Head>
-        <title>Sign Up - Queen Clothes</title>
+        <title>Registrarse - Queen Clothes</title>
       </Head>
       <AuthLayout
-        title="Sign up for an account"
+        title="Regístrese para obtener una cuenta"
         subtitle={
           <>
-            Already registered?&nbsp;
+            ¿Ya estas registrado?&nbsp;
             <Link href="/login" className="text-pink-600">
-              Sign in
+              Ingresar
             </Link>
-            &nbsp; to your account.
+            &nbsp; a tu cuenta.
           </>
         }
       >
         <form>
           <div className="grid grid-cols-2 gap-6">
             <TextField
-              label="First name"
+              label="Nombre"
               id="first_name"
               name="first_name"
               type="text"
@@ -33,7 +33,7 @@ export default function Register() {
               required
             />
             <TextField
-              label="Last name"
+              label="Apellido"
               id="last_name"
               name="last_name"
               type="text"
@@ -42,7 +42,7 @@ export default function Register() {
             />
             <TextField
               className="col-span-full"
-              label="Email address"
+              label="Correo electronico"
               id="email"
               name="email"
               type="email"
@@ -51,27 +51,16 @@ export default function Register() {
             />
             <TextField
               className="col-span-full"
-              label="Password"
+              label="Contraseña"
               id="password"
               name="password"
               type="password"
               autoComplete="new-password"
               required
             />
-            <SelectField
-              className="col-span-full"
-              label="How did you hear about us?"
-              id="referral-source"
-              name="referral_source"
-            >
-              <option>AltaVista search</option>
-              <option>Super Bowl commercial</option>
-              <option>Our route 34 city bus ad</option>
-              <option>The “Never Use This” podcast</option>
-            </SelectField>
           </div>
           <Button type="submit" color="pink" className="mt-8 w-full">
-            Get started today
+            Crear mi cuenta
           </Button>
         </form>
       </AuthLayout>

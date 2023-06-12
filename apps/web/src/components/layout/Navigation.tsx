@@ -4,7 +4,7 @@ import { Fragment, useState } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import {
   Bars3Icon,
-  MagnifyingGlassIcon,
+  // MagnifyingGlassIcon,
   ShoppingBagIcon,
 } from '@heroicons/react/24/outline';
 
@@ -221,12 +221,12 @@ export const Navigation = () => {
             </div>
 
             {/* Search */}
-            <div className="flex lg:ml-6">
+            {/* <div className="flex lg:ml-6">
               <div className="p-2 text-gray-400 hover:text-gray-500">
                 <span className="sr-only">Buscar</span>
                 <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
               </div>
-            </div>
+            </div> */}
 
             {/* Cart */}
             <div className="ml-4 flow-root lg:ml-6">

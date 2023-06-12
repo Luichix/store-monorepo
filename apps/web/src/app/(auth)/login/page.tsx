@@ -23,24 +23,23 @@ export default function Login() {
   return (
     <>
       <Head>
-        <title>Sign In - Queen Clothes</title>
+        <title>Login - Queen Clothes</title>
       </Head>
       <AuthLayout
-        title="Sign in to account"
+        title="Ingresar a la cuenta"
         subtitle={
           <>
-            Don’t have an account?&nbsp;
+            ¿No tienes una cuenta?&nbsp;
             <Link href="/register" className="text-pink-600">
-              Sign up
+              Crear mi cuenta
             </Link>
-            &nbsp; for a free trial.
           </>
         }
       >
-        <form>
+        <form className="-mt-4">
           <div className="space-y-6">
             <TextField
-              label="Email address"
+              label="Correo electronico"
               id="email"
               name="email"
               type="email"
@@ -50,7 +49,7 @@ export default function Login() {
               onChange={({ target }) => setEmail(target.value)}
             />
             <TextField
-              label="Password"
+              label="Contraseña"
               id="password"
               name="password"
               type="password"
@@ -66,7 +65,7 @@ export default function Login() {
             color="pink"
             className="mt-8 w-full"
           >
-            Sign in to account
+            Ingresar a la cuenta
           </Button>
         </form>
       </AuthLayout>

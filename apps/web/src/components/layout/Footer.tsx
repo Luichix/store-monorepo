@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import footerNavigation from 'public/data/footer-navigation.json';
 
 export const Footer = () => {
@@ -11,22 +12,22 @@ export const Footer = () => {
           <div className="grid grid-cols-2 gap-8 xl:col-span-2">
             <div className="space-y-16 md:grid md:grid-cols-2 md:gap-8 md:space-y-0">
               <div>
-                <h3 className="text-sm font-medium text-gray-900">Shop</h3>
+                <h3 className="text-sm font-medium text-gray-900">Tienda</h3>
                 <ul role="list" className="mt-6 space-y-6">
                   {footerNavigation.shop.map((item) => (
                     <li key={item.name} className="text-sm">
-                      <a
+                      <Link
                         href={item.href}
                         className="text-gray-500 hover:text-gray-600"
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
               </div>
               <div>
-                <h3 className="text-sm font-medium text-gray-900">Company</h3>
+                <h3 className="text-sm font-medium text-gray-900">Empresa</h3>
                 <ul role="list" className="mt-6 space-y-6">
                   {footerNavigation.company.map((item) => (
                     <li key={item.name} className="text-sm">
@@ -43,7 +44,7 @@ export const Footer = () => {
             </div>
             <div className="space-y-16 md:grid md:grid-cols-2 md:gap-8 md:space-y-0">
               <div>
-                <h3 className="text-sm font-medium text-gray-900">Account</h3>
+                <h3 className="text-sm font-medium text-gray-900">Cuenta</h3>
                 <ul role="list" className="mt-6 space-y-6">
                   {footerNavigation.account.map((item) => (
                     <li key={item.name} className="text-sm">
@@ -58,7 +59,7 @@ export const Footer = () => {
                 </ul>
               </div>
               <div>
-                <h3 className="text-sm font-medium text-gray-900">Connect</h3>
+                <h3 className="text-sm font-medium text-gray-900">Conectar</h3>
                 <ul role="list" className="mt-6 space-y-6">
                   {footerNavigation.connect.map((item) => (
                     <li key={item.name} className="text-sm">
@@ -107,7 +108,7 @@ export const Footer = () => {
 
         <div className="border-t border-gray-200 py-10">
           <p className="text-sm text-gray-500">
-            Copyright &copy; 2023 Queen Clothes, Inc.
+            Todos los derecheros reservados &copy; 2023 Queen Clothes, Inc.
           </p>
         </div>
       </div>
