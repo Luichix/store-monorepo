@@ -1,10 +1,53 @@
+'use client';
 import Head from 'next/head';
 import Link from 'next/link';
 
 import { AuthLayout } from '@/components/layout';
 import { Button, TextField, SelectField } from '@/components/common';
-
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 export default function Register() {
+  const router = useRouter();
+  const [name, setName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      name: `${name} ${lastName}`,
+      email: email,
+      password: password,
+    };
+
+    const URL = process.env.NEXT_PUBLIC_API_URL;
+
+    try {
+      const response = await fetch(`${URL}/user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('User created:', result);
+        // Realiza alguna acción adicional después de crear el usuario
+        router.push('/login'); // Redirige a la página de inicio de sesión
+      } else {
+        console.error('Error creating user:', response.status);
+        // Maneja el error apropiadamente
+      }
+    } catch (error) {
+      console.error('Error creating user:', error);
+      // Maneja el error apropiadamente
+    }
+  };
+
   return (
     <>
       <Head>
@@ -22,7 +65,7 @@ export default function Register() {
           </>
         }
       >
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-6">
             <TextField
               label="Nombre"
@@ -30,6 +73,7 @@ export default function Register() {
               name="first_name"
               type="text"
               autoComplete="given-name"
+              onChange={(e) => setName(e.target.value)}
               required
             />
             <TextField
@@ -38,6 +82,7 @@ export default function Register() {
               name="last_name"
               type="text"
               autoComplete="family-name"
+              onChange={(e) => setLastName(e.target.value)}
               required
             />
             <TextField
@@ -47,6 +92,7 @@ export default function Register() {
               name="email"
               type="email"
               autoComplete="email"
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             <TextField
@@ -56,6 +102,7 @@ export default function Register() {
               name="password"
               type="password"
               autoComplete="new-password"
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
