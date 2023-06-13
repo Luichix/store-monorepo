@@ -5,6 +5,7 @@ import Gallery from '@/components/common/Gallery';
 import Details from '@/components/common/Details';
 import { classNames } from '@/utils/classNames';
 import { fetchItem } from '@/utils';
+import ButtonBag from '@/components/common/ButtonBag';
 
 const reviews = {
   average: 4,
@@ -195,13 +196,7 @@ export default async function Product({ params }) {
                 </div>
 
                 <div className="mt-10 flex">
-                  <button
-                    type="submit"
-                    className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-pink-500 px-8 py-3 text-base font-medium text-white hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
-                  >
-                    Add to bag
-                  </button>
-
+                  <ButtonBag itemId={id} />
                   <button
                     type="button"
                     className="ml-4 flex items-center justify-center rounded-md px-3 py-3 text-gray-400 hover:bg-gray-100 hover:text-gray-500"
