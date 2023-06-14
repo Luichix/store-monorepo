@@ -1,3 +1,4 @@
+import { Cart } from '@/types';
 import NextAuth from 'next-auth/next';
 
 declare module 'next-auth' {
@@ -7,6 +8,7 @@ declare module 'next-auth' {
       name: string;
       email: string;
       accessToken: string;
+      cart: Cart[];
     };
   }
 }

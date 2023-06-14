@@ -1,14 +1,16 @@
 'use client';
+import DeleteItem from '@/components/common/DeleteItem';
+import { useFetchCartItems } from '@/hooks';
+import useCart from '@/store';
+import { Cart } from '@/types';
 import {
   CheckIcon,
   ClockIcon,
   QuestionMarkCircleIcon,
-  XMarkIcon as XMarkIconMini,
 } from '@heroicons/react/20/solid';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 const relatedProducts = [
   {
@@ -25,31 +27,13 @@ const relatedProducts = [
 ];
 
 export default function Cart() {
-  const [cartItems, setCartItems] = useState([]);
-  const { data: session } = useSession();
-  useEffect(() => {
-    const URL = process.env.NEXT_PUBLIC_API_URL;
-    if (session?.user?.accessToken) {
-      fetch(`${URL}/user/${session.user.id}`, {
-        headers: {
-          authorization: session.user.accessToken,
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          // Manipula los datos recibidos
-          setCartItems(data);
-        })
-        .catch((error) => {
-          // Maneja los errores
-          console.log(error);
-        });
-    }
-  }, [session]);
+  const { cart } = useCart();
 
-  const isDataEmpty =
-    !Array.isArray(cartItems) || cartItems.length < 1 || !cartItems;
+  const { data: session } = useSession();
+
+  useFetchCartItems(session);
+
+  const isDataEmpty = !Array.isArray(cart) || cart.length < 1 || !cart;
 
   const getTotal = (cartItems) =>
     cartItems.reduce((amount, item) => item.items.price + amount, 0);
@@ -72,8 +56,8 @@ export default function Cart() {
                 role="list"
                 className="divide-y divide-gray-200 border-b border-t border-gray-200"
               >
-                {cartItems.map(({ items }, productIdx) => (
-                  <li key={items.id} className="flex py-6 sm:py-10">
+                {cart.map(({ id, items }, productIdx) => (
+                  <li key={productIdx} className="flex py-6 sm:py-10">
                     <div className="flex-shrink-0">
                       <Image
                         src={items.imageUrl}
@@ -81,6 +65,8 @@ export default function Cart() {
                         width={192}
                         height={192}
                         className="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48"
+                        // loading="lazy"
+                        // priority={true}
                       />
                     </div>
 
@@ -90,7 +76,7 @@ export default function Cart() {
                           <div>
                             <h3 className="text-sm">
                               <Link
-                                href={`collection/${items.id}`}
+                                href={`/collection/${items.id}`}
                                 className="font-medium text-gray-700 hover:text-gray-800"
                               >
                                 {items.item}
@@ -133,16 +119,7 @@ export default function Cart() {
                           </select>
 
                           <div className="absolute right-0 top-0">
-                            <button
-                              type="button"
-                              className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500"
-                            >
-                              <span className="sr-only">Remove</span>
-                              <XMarkIconMini
-                                className="h-5 w-5"
-                                aria-hidden="true"
-                              />
-                            </button>
+                            <DeleteItem cartId={id} />
                           </div>
                         </div>
                       </div>
@@ -186,7 +163,7 @@ export default function Cart() {
                 <div className="flex items-center justify-between">
                   <dt className="text-sm text-gray-600">Subtotal</dt>
                   <dd className="text-sm font-medium text-gray-900">
-                    C$ {getTotal(cartItems).toFixed(2)}
+                    C$ {getTotal(cart).toFixed(2)}
                   </dd>
                 </div>
                 <div className="flex items-center justify-between border-t border-gray-200 pt-4">
@@ -230,7 +207,22 @@ export default function Cart() {
             </section>
           </form>
         ) : (
-          <>None</>
+          <form className="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
+            <section aria-labelledby="cart-heading" className="lg:col-span-7">
+              <h2 id="cart-heading" className="sr-only">
+                Items en tu carrito de compras
+              </h2>
+
+              <ul
+                role="list"
+                className="divide-y divide-gray-200 border-b border-t border-gray-200"
+              >
+                <li className="flex py-6 sm:py-10">
+                  <p>No hay items en tu carrito...</p>
+                </li>
+              </ul>
+            </section>
+          </form>
         )}
         {/* Related products */}
         {/* <section aria-labelledby="related-heading" className="mt-24">

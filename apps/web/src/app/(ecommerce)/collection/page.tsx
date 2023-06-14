@@ -58,7 +58,10 @@ export default async function Collection({ searchParams }: CollectionProps) {
                 </div>
                 <div className="pb-4 pt-10 ">
                   <h3 className="text-sm font-medium text-gray-900">
-                    <Link href={`collection/${product.id}`}>
+                    <Link
+                      href={'collection/[id]'}
+                      as={`collection/${product.id}`}
+                    >
                       <span aria-hidden="true" className="absolute inset-0" />
                       {product.item}
                     </Link>

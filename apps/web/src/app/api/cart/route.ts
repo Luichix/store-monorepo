@@ -25,6 +25,9 @@ export async function POST(request: Request) {
       itemId: body.itemId,
       quantity: body.quantity,
     },
+    include: {
+      items: true,
+    },
   });
 
   return new Response(JSON.stringify(cartItem));

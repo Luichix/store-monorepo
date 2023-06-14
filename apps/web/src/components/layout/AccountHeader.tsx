@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon } from '@heroicons/react/20/solid';
 import { XMarkIcon } from '@heroicons/react/24/outline';
@@ -7,12 +7,11 @@ import { Logo } from '../common';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import {
-  // MagnifyingGlassIcon,
-  ShoppingBagIcon,
-} from '@heroicons/react/24/outline';
+import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 
 import { signIn, signOut, useSession } from 'next-auth/react';
+import useCart from '@/store';
+import { useFetchCartItems } from '@/hooks';
 
 const navigation = [
   { name: 'Tienda', href: 'collection' },
@@ -23,6 +22,10 @@ const navigation = [
 export const AccountHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { data: session } = useSession();
+
+  useFetchCartItems(session);
+
+  const { cart } = useCart();
 
   return (
     <header className="absolute inset-x-0 top-0 z-50 flex h-16 border-b border-gray-900/10">
@@ -120,7 +123,7 @@ export const AccountHeader = () => {
                 aria-hidden="true"
               />
               <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                0
+                {cart.length}
               </span>
               <span className="sr-only">
                 artículos en el carrito, ver bolsa

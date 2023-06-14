@@ -1,10 +1,12 @@
 'use client';
+import useCart from '@/store';
 import { useSession } from 'next-auth/react';
 import React from 'react';
 
 const ButtonBag = ({ itemId }: { itemId: string }) => {
   const { data: session } = useSession();
 
+  const { addItem } = useCart();
   const handlerSubmit = async () => {
     const URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -27,7 +29,10 @@ const ButtonBag = ({ itemId }: { itemId: string }) => {
         if (response.ok) {
           const result = await response.json();
           console.log('Add into bag:', result);
-          alert('Agregado al carrito');
+
+          addItem(result);
+
+          // alert('Agregado al carrito');
           // Realiza alguna acción adicional después de crear el usuario
         } else {
           console.error('Error add item into bag:', response.status);

@@ -37,3 +37,12 @@ export interface Item {
   price?: number;
   state?: string;
 }
+
+export interface Cart {
+  id: string;
+  itemId: string;
+  items?: Item;
+  quantity: number;
+  userId: string;
+  v?: string;
+}

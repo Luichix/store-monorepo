@@ -2,6 +2,8 @@ import { FilterProps } from '@/types';
 
 const NEXT_URL = process.env.NEXTAUTH_URL;
 
+/* ---------------------------- fetch collection ---------------------------- */
+
 export async function fetchCollection(filters: FilterProps) {
   const {
     section,
@@ -36,10 +38,10 @@ export async function fetchCollection(filters: FilterProps) {
   return data;
 }
 
+/* ------------------------------- fetch item ------------------------------- */
+
 export async function fetchItem(itemId: string) {
   const res = await fetch(`${NEXT_URL}/api/collection/${itemId}`);
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
 
   // Recommendation: handle errors
   if (!res.ok) {
@@ -49,6 +51,8 @@ export async function fetchItem(itemId: string) {
 
   return res.json();
 }
+
+/* ------------------------------- fetch cart ------------------------------- */
 export async function fetchCart({
   id,
   authorization,
@@ -62,9 +66,6 @@ export async function fetchCart({
       'Content-Type': 'application/json',
     },
   });
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
   // Recommendation: handle errors
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
@@ -74,49 +75,8 @@ export async function fetchCart({
   return res.json();
 }
 
-// interface CartItemProps {
-//   userId: string;
-//   itemId: string;
-//   quantity: string;
-// }
-
-// export async function fetchCart(cartItem: CartItemProps) {
-//   // Set the required headers for the API request
-
-//   const headers: HeadersInit = {
-//     authorization: '',
-//   };
-
-//   const body = cartItem;
-
-//   // Set the required headers for the API request
-//   const response = await fetch('http://localhost:3000/api/cart ', {
-//     headers: headers,
-//     method: 'POST',
-//   });
-
-//   // Parse the response as JSON
-//   const result = await response.json();
-
-//   return result;
-// }
-
 /**
  * 
- * export const calculateCarRent = (city_mpg: number, year: number) => {
-  const basePricePerDay = 50; // Base rental price per day in dollars
-  const mileageFactor = 0.1; // Additional rate per mile driven
-  const ageFactor = 0.05; // Additional rate per year of vehicle age
-
-  // Calculate additional rate based on mileage and age
-  const mileageRate = city_mpg * mileageFactor;
-  const ageRate = (new Date().getFullYear() - year) * ageFactor;
-
-  // Calculate total rental rate per day
-  const rentalRatePerDay = basePricePerDay + mileageRate + ageRate;
-
-  return rentalRatePerDay.toFixed(0);
-};
 
 export const updateSearchParams = (type: string, value: string) => {
   // Get the current URL search params
@@ -146,28 +106,6 @@ export const deleteSearchParams = (type: string) => {
   return newPathname;
 };
 
-export async function fetchCars(filters: FilterProps) {
-  const { manufacturer, year, model, limit, fuel } = filters;
-
-  // Set the required headers for the API request
-  const headers: HeadersInit = {
-    'X-RapidAPI-Key': process.env.NEXT_PUBLIC_RAPID_API_KEY || '',
-    'X-RapidAPI-Host': 'cars-by-api-ninjas.p.rapidapi.com',
-  };
-
-  // Set the required headers for the API request
-  const response = await fetch(
-    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`,
-    {
-      headers: headers,
-    }
-  );
-
-  // Parse the response as JSON
-  const result = await response.json();
-
-  return result;
-}
 
 export const generateCarImageUrl = (car: CarProps, angle?: string) => {
   const url = new URL('https://cdn.imagin.studio/getimage');

@@ -2,11 +2,7 @@
 
 import { Fragment, useState } from 'react';
 import { Popover, Transition } from '@headlessui/react';
-import {
-  Bars3Icon,
-  // MagnifyingGlassIcon,
-  ShoppingBagIcon,
-} from '@heroicons/react/24/outline';
+import { Bars3Icon, ShoppingBagIcon } from '@heroicons/react/24/outline';
 
 import navigation from 'public/data/navigation-dummies.json';
 import Image from 'next/image';
@@ -15,11 +11,15 @@ import Link from 'next/link';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { Logo } from '../common';
 import { classNames } from '@/utils/classNames';
+import useCart from '@/store';
+import { useFetchCartItems } from '@/hooks';
 
 export const Navigation = () => {
   const [open, setOpen] = useState(false);
-
   const { data: session } = useSession();
+  useFetchCartItems(session);
+
+  const { cart } = useCart();
 
   return (
     <nav
@@ -236,7 +236,7 @@ export const Navigation = () => {
                   aria-hidden="true"
                 />
                 <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                  0
+                  {cart.length}
                 </span>
                 <span className="sr-only">
                   artículos en el carrito, ver bolsa

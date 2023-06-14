@@ -10,7 +10,7 @@ importers:
       prettier: ^2.8.8
       turbo: ^1.10.3
     devDependencies:
-      '@turbo/gen': 1.10.3_smmyyhjeibwoolo5mzjtmkgbwq
+      '@turbo/gen': 1.10.3_cin3sed6ohfsopbmt6orxeb4o4
       eslint: 7.32.0
       eslint-config-custom: link:packages/eslint-config-custom
       prettier: 2.8.8
@@ -68,6 +68,7 @@ importers:
       tsconfig: workspace:*
       typescript: ^4.5.3
       ui: workspace:*
+      zustand: ^4.3.8
     dependencies:
       '@headlessui/react': 1.7.14_biqbaboplfbrettd7655fr4n2y
       '@heroicons/react': 2.0.18_react@18.2.0
@@ -81,6 +82,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       ui: link:../../packages/ui
+      zustand: 4.3.8_react@18.2.0
     devDependencies:
       '@types/bcrypt': 5.0.0
       '@types/jsonwebtoken': 9.0.2
@@ -1017,7 +1019,7 @@ packages:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
     dev: true
 
-  /@turbo/gen/1.10.3_smmyyhjeibwoolo5mzjtmkgbwq:
+  /@turbo/gen/1.10.3_cin3sed6ohfsopbmt6orxeb4o4:
     resolution: {integrity: sha512-AWQme9P9X9ENko8hEW4iKsr3ry7zRtx/RPGBXJuJFF+ecWmoSQYf83+D02G0p2pYV5rCAlerf9WOdOU9zbaqSw==}
     hasBin: true
     dependencies:
@@ -1028,7 +1030,7 @@ packages:
       minimatch: 9.0.1
       node-plop: 0.26.3
       semver: 7.5.1
-      ts-node: 10.9.1_smmyyhjeibwoolo5mzjtmkgbwq
+      ts-node: 10.9.1_cin3sed6ohfsopbmt6orxeb4o4
       update-check: 1.5.4
       validate-npm-package-name: 5.0.0
     transitivePeerDependencies:
@@ -4500,7 +4502,7 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
-  /ts-node/10.9.1_smmyyhjeibwoolo5mzjtmkgbwq:
+  /ts-node/10.9.1_cin3sed6ohfsopbmt6orxeb4o4:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -4519,7 +4521,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.3.0
+      '@types/node': 17.0.45
       acorn: 8.8.2
       acorn-walk: 8.2.0
       arg: 4.1.3
@@ -4710,6 +4712,14 @@ packages:
     dependencies:
       punycode: 2.3.0
 
+  /use-sync-external-store/1.2.0_react@18.2.0:
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
@@ -4882,4 +4892,20 @@ packages:
 
   /zod/3.21.4:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
+    dev: false
+
+  /zustand/4.3.8_react@18.2.0:
+    resolution: {integrity: sha512-4h28KCkHg5ii/wcFFJ5Fp+k1J3gJoasaIbppdgZFO4BPJnsNxL0mQXBSFgOgAdCdBj35aDTPvdAJReTMntFPGg==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
