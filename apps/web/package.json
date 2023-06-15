@@ -12,6 +12,7 @@
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.18",
     "@prisma/client": "^4.15.0",
+    "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "clsx": "^1.2.1",
     "firebase": "^9.22.1",

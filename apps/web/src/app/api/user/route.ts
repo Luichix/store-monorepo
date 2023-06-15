@@ -14,6 +14,7 @@ export async function POST(request: Request) {
       name: body.name,
       email: body.email,
       password: await bcrypt.hash(body.password, 10),
+      role: 'user',
     },
   });
 

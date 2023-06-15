@@ -1,3 +1,15 @@
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  role: string;
+  accessToken: string;
+  refreshToken: string;
+  cart: Cart[];
+}
+
 export interface CollectionProps {
   searchParams: FilterProps;
 }

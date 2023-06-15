@@ -41,6 +41,9 @@ model Users {
   v        Int?    @map("__v")
   email    String
   name     String
+  phone    String?
+  address  String?
+  role     String
   password String
   cart     Cart[]
   orders   Order[]
