@@ -1,8 +1,8 @@
 'use client';
 
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
-import { Bars3Icon, ShoppingBagIcon } from '@heroicons/react/24/outline';
+import { ShoppingBagIcon, HomeIcon } from '@heroicons/react/24/outline';
 
 import navigation from 'public/data/navigation-dummies.json';
 import Image from 'next/image';
@@ -15,7 +15,6 @@ import useCart from '@/store';
 import { useFetchCartItems } from '@/hooks';
 
 export const Navigation = () => {
-  const [open, setOpen] = useState(false);
   const { data: session } = useSession();
   useFetchCartItems(session);
 
@@ -28,18 +27,8 @@ export const Navigation = () => {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center">
-          <button
-            type="button"
-            className="rounded-md bg-white p-2 text-gray-400 lg:hidden"
-            onClick={() => setOpen(true)}
-          >
-            <span className="sr-only">Open menu</span>
-
-            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-          </button>
-
           {/* Logo */}
-          <div className="ml-4 flex lg:ml-0">
+          <div className="ml-8 flex lg:ml-0">
             <Link href="/">
               <span className="sr-only">Your Company</span>
               <Logo width={32} height={32} />
@@ -179,6 +168,18 @@ export const Navigation = () => {
                       {session.user.email}
                     </p>
                   </Link>
+                  {session.user.role === 'admin' && (
+                    <Link
+                      href="admin/dashboard"
+                      className="text-sm font-medium text-gray-700 flex flex-col items-end hover:text-gray-800"
+                    >
+                      <HomeIcon
+                        className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  )}
+
                   <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
                   <button
                     onClick={() => signOut()}
@@ -219,14 +220,6 @@ export const Navigation = () => {
                 <span className="sr-only">, cambiar moneda</span>
               </div>
             </div>
-
-            {/* Search */}
-            {/* <div className="flex lg:ml-6">
-              <div className="p-2 text-gray-400 hover:text-gray-500">
-                <span className="sr-only">Buscar</span>
-                <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-              </div>
-            </div> */}
 
             {/* Cart */}
             <div className="ml-4 flow-root lg:ml-6">

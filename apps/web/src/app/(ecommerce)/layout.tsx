@@ -7,8 +7,8 @@ export default function EcommerceLayout({
 }) {
   return (
     <div>
-      <MobileNavigation />
       <Navigation />
+      <MobileNavigation />
       {children}
       <Footer />
     </div>

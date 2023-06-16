@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon } from '@heroicons/react/20/solid';
 import { XMarkIcon } from '@heroicons/react/24/outline';
@@ -7,7 +7,7 @@ import { Logo } from '../common';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { ShoppingBagIcon } from '@heroicons/react/24/outline';
+import { ShoppingBagIcon, HomeIcon } from '@heroicons/react/24/outline';
 
 import { signIn, signOut, useSession } from 'next-auth/react';
 import useCart from '@/store';
@@ -66,6 +66,17 @@ export const AccountHeader = () => {
                   {session.user.name} &nbsp;
                   <p className="text-xs  text-gray-400">{session.user.email}</p>
                 </Link>
+                {session.user.role === 'admin' && (
+                  <Link
+                    href="admin/dashboard"
+                    className="text-sm font-medium text-gray-700 flex flex-col items-end hover:text-gray-800"
+                  >
+                    <HomeIcon
+                      className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                      aria-hidden="true"
+                    />
+                  </Link>
+                )}
                 <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
                 <button
                   onClick={() => signOut()}
