@@ -38,12 +38,10 @@ export default function Checkout() {
 
   const onSubmit = async () => {
     if (session?.user?.accessToken) {
-      const order = await confirmOrder({
+      await confirmOrder({
         authorization: session.user.accessToken,
         userId: session.user.id,
       });
-
-      console.log(order);
     }
   };
 

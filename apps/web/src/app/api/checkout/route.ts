@@ -35,23 +35,19 @@ export async function POST(request: Request) {
     });
 
     const data = {
-      chat_id: '6144943354',
-      text: 'This message is the server',
+      chat_id: CHAT_ID,
+      text: 'New Order - Please Check Web',
     };
 
-    const sendMessage = await fetch(
-      'https://api.telegram.org/bot6240552119:AAFiPpXqq7Gtvtr9JT4_vYjAri1_M3cTW0M/sendMessage​',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userCart),
-      }
-    );
+    const sendMessage = await fetch(URL_TELEGRAM, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
 
     if (!sendMessage.ok) {
-      console.log(sendMessage);
       throw new Error('Failed to send message to Telegram');
     }
 
