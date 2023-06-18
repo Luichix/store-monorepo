@@ -3,6 +3,7 @@ import DeleteItem from '@/components/common/DeleteItem';
 import { useFetchCartItems } from '@/hooks';
 import useCart from '@/store';
 import { Cart } from '@/types';
+
 import {
   CheckIcon,
   ClockIcon,
@@ -197,12 +198,13 @@ export default function Cart() {
               </dl>
 
               <div className="mt-6">
-                <button
-                  type="submit"
-                  className="w-full rounded-md border border-transparent bg-pink-500 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                <Link
+                  href={'checkout'}
+                  // type="submit"
+                  className="w-full flex  justify-center rounded-md border border-transparent bg-pink-500 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                 >
                   Checkout
-                </button>
+                </Link>
               </div>
             </section>
           </form>

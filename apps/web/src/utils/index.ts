@@ -1,8 +1,33 @@
 import { FilterProps } from '@/types';
 
-const NEXT_URL = process.env.NEXTAUTH_URL;
+const NEXT_URL = process.env.NEXT_PUBLIC_API_URL;
 
 /* ---------------------------- fetch collection ---------------------------- */
+
+export async function confirmOrder({
+  userId,
+  authorization,
+}: {
+  userId: string;
+  authorization: string;
+}) {
+  const res = await fetch(`${NEXT_URL}/checkout`, {
+    method: 'POST',
+    headers: {
+      authorization,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ userId }),
+  });
+
+  // Recommendation: handle errors
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}
 
 export async function fetchCollection(filters: FilterProps) {
   const {
@@ -75,9 +100,6 @@ export async function fetchCart({
   return res.json();
 }
 
-/**
- * 
-
 export const updateSearchParams = (type: string, value: string) => {
   // Get the current URL search params
   const searchParams = new URLSearchParams(window.location.search);
@@ -90,6 +112,9 @@ export const updateSearchParams = (type: string, value: string) => {
 
   return newPathname;
 };
+/**
+ * 
+
 
 export const deleteSearchParams = (type: string) => {
   // Set the specified search parameter to the given value

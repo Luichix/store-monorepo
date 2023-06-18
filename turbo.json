@@ -5,7 +5,10 @@
     "SECRET_KEY",
     "NODE_ENV",
     "NEXT_PUBLIC_API_URL",
-    "NEXTAUTH_URL"
+    "NEXTAUTH_URL",
+    "API_TELEGRAM",
+    "CHAT_ID_TELEGRAM",
+    "TOKEN_BOT_TELEGRAM"
   ],
   "pipeline": {
     "build": {

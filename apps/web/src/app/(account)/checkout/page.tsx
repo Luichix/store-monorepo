@@ -1,13 +1,12 @@
 'use client';
-
 import Image from 'next/image';
 import { TrashIcon } from '@heroicons/react/20/solid';
+import useCart from '@/store';
+import { useSession } from 'next-auth/react';
+import { useFetchCartItems } from '@/hooks';
+import Link from 'next/link';
+import { confirmOrder } from '@/utils';
 
-const steps = [
-  { name: 'Cart', href: '#', status: 'complete' },
-  { name: 'Billing Information', href: '#', status: 'current' },
-  { name: 'Confirmation', href: '#', status: 'upcoming' },
-];
 const products = [
   {
     id: 1,
@@ -25,9 +24,31 @@ const products = [
   // More products...
 ];
 
-export default function Example() {
+export default function Checkout() {
+  const { cart } = useCart();
+
+  const { data: session } = useSession();
+
+  useFetchCartItems(session);
+
+  const isDataEmpty = !Array.isArray(cart) || cart.length < 1 || !cart;
+
+  const getTotal = (cartItems) =>
+    cartItems.reduce((amount, item) => item.items.price + amount, 0);
+
+  const onSubmit = async () => {
+    if (session?.user?.accessToken) {
+      const order = await confirmOrder({
+        authorization: session.user.accessToken,
+        userId: session.user.id,
+      });
+
+      console.log(order);
+    }
+  };
+
   return (
-    <div className="bg-white">
+    <div className="bg-white pt-10">
       {/* Background color split screen for large screens */}
       <div
         className="fixed left-0 top-0 hidden h-full w-1/2 bg-white lg:block"
@@ -39,7 +60,7 @@ export default function Example() {
       />
 
       <main className="relative mx-auto grid max-w-7xl grid-cols-1 gap-x-16 lg:grid-cols-2 lg:px-8 xl:gap-x-48">
-        <h1 className="sr-only">Order information</h1>
+        <h1 className="sr-only">Información de Contacto</h1>
 
         <section
           aria-labelledby="summary-heading"
@@ -47,17 +68,19 @@ export default function Example() {
         >
           {/* Order summary */}
           <div className="mt-10 lg:mt-0">
-            <h2 className="text-lg font-medium text-gray-900">Order summary</h2>
+            <h2 className="text-lg font-medium text-gray-900">
+              Resumen del Pedido
+            </h2>
 
             <div className="mt-4 rounded-lg border border-gray-200 bg-white shadow-sm">
-              <h3 className="sr-only">Items in your cart</h3>
+              <h3 className="sr-only">Items en tu carrito</h3>
               <ul role="list" className="divide-y divide-gray-200">
-                {products.map((product) => (
-                  <li key={product.id} className="flex px-4 py-6 sm:px-6">
+                {cart.map(({ items }, index) => (
+                  <li key={index} className="flex px-4 py-6 sm:px-6">
                     <div className="flex-shrink-0">
                       <Image
-                        src={product.imageSrc}
-                        alt={product.imageAlt}
+                        src={items.imageUrl}
+                        alt={items.description}
                         width={80}
                         height={80}
                         className="w-20 rounded-md"
@@ -68,18 +91,18 @@ export default function Example() {
                       <div className="flex">
                         <div className="min-w-0 flex-1">
                           <h4 className="text-sm">
-                            <a
-                              href={product.href}
+                            <Link
+                              href={`collection/${items.id}`}
                               className="font-medium text-gray-700 hover:text-gray-800"
                             >
-                              {product.title}
-                            </a>
+                              {items.item}
+                            </Link>
                           </h4>
                           <p className="mt-1 text-sm text-gray-500">
-                            {product.color}
+                            {items.color}
                           </p>
                           <p className="mt-1 text-sm text-gray-500">
-                            {product.size}
+                            {items.size}
                           </p>
                         </div>
 
@@ -88,7 +111,7 @@ export default function Example() {
                             type="button"
                             className="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-gray-500"
                           >
-                            <span className="sr-only">Remove</span>
+                            <span className="sr-only">Remover</span>
                             <TrashIcon className="h-5 w-5" aria-hidden="true" />
                           </button>
                         </div>
@@ -96,17 +119,17 @@ export default function Example() {
 
                       <div className="flex flex-1 items-end justify-between pt-2">
                         <p className="mt-1 text-sm font-medium text-gray-900">
-                          {product.price}
+                          C$ {items.price}
                         </p>
 
                         <div className="ml-4">
                           <label htmlFor="quantity" className="sr-only">
-                            Quantity
+                            Cantidad
                           </label>
                           <select
                             id="quantity"
                             name="quantity"
-                            className="rounded-md border border-gray-300 text-left text-base font-medium text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                            className="rounded-md border border-gray-300 text-left text-base font-medium text-gray-700 shadow-sm focus:border-cyan-500 focus:outline-none cyanocus:ring-1 focus:ring-cyan-500 sm:text-sm"
                           >
                             <option value={1}>1</option>
                             <option value={2}>2</option>
@@ -129,11 +152,11 @@ export default function Example() {
                   <dd className="text-sm font-medium text-gray-900">$64.00</dd>
                 </div>
                 <div className="flex items-center justify-between">
-                  <dt className="text-sm">Shipping</dt>
+                  <dt className="text-sm">Envio</dt>
                   <dd className="text-sm font-medium text-gray-900">$5.00</dd>
                 </div>
                 <div className="flex items-center justify-between">
-                  <dt className="text-sm">Taxes</dt>
+                  <dt className="text-sm">Impuestos</dt>
                   <dd className="text-sm font-medium text-gray-900">$5.52</dd>
                 </div>
                 <div className="flex items-center justify-between border-t border-gray-200 pt-6">
@@ -146,10 +169,11 @@ export default function Example() {
 
               <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                 <button
-                  type="submit"
-                  className="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                  type="button"
+                  onClick={onSubmit}
+                  className="w-full rounded-md border border-transparent bg-pink-500 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                 >
-                  Confirm order
+                  Confirmar Orden
                 </button>
               </div>
             </div>
@@ -163,7 +187,7 @@ export default function Example() {
                 id="contact-info-heading"
                 className="text-lg font-medium text-gray-900"
               >
-                Contact information
+                Información de Contacto
               </h2>
 
               <div className="mt-6">
@@ -171,7 +195,7 @@ export default function Example() {
                   htmlFor="email-address"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Email address
+                  Correo Electronico
                 </label>
                 <div className="mt-1">
                   <input
@@ -179,7 +203,7 @@ export default function Example() {
                     id="email-address"
                     name="email-address"
                     autoComplete="email"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm"
                   />
                 </div>
               </div>
@@ -190,7 +214,7 @@ export default function Example() {
                 id="payment-heading"
                 className="text-lg font-medium text-gray-900"
               >
-                Payment details
+                Detalle de Pagos
               </h2>
 
               <div className="mt-6 grid grid-cols-3 gap-x-4 gap-y-6 sm:grid-cols-4">
@@ -199,7 +223,7 @@ export default function Example() {
                     htmlFor="name-on-card"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Name on card
+                    Nombre Completo
                   </label>
                   <div className="mt-1">
                     <input
@@ -207,17 +231,17 @@ export default function Example() {
                       id="name-on-card"
                       name="name-on-card"
                       autoComplete="cc-name"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm"
                     />
                   </div>
                 </div>
 
-                <div className="col-span-3 sm:col-span-4">
+                <div className="col-span-3 sm:col-span-2">
                   <label
                     htmlFor="card-number"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Card number
+                    Documento de Identidad
                   </label>
                   <div className="mt-1">
                     <input
@@ -225,17 +249,17 @@ export default function Example() {
                       id="card-number"
                       name="card-number"
                       autoComplete="cc-number"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm"
                     />
                   </div>
                 </div>
 
-                <div className="col-span-2 sm:col-span-3">
+                <div className="col-span-2 sm:col-span-2">
                   <label
                     htmlFor="expiration-date"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Expiration date (MM/YY)
+                    Telefono
                   </label>
                   <div className="mt-1">
                     <input
@@ -243,25 +267,7 @@ export default function Example() {
                       name="expiration-date"
                       id="expiration-date"
                       autoComplete="cc-exp"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="cvc"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    CVC
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      name="cvc"
-                      id="cvc"
-                      autoComplete="csc"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -273,33 +279,16 @@ export default function Example() {
                 id="shipping-heading"
                 className="text-lg font-medium text-gray-900"
               >
-                Shipping address
+                Dirección de envió
               </h2>
 
               <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-3">
                 <div className="sm:col-span-3">
                   <label
-                    htmlFor="company"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Company
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
                     htmlFor="address"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Address
+                    Dirección 1
                   </label>
                   <div className="mt-1">
                     <input
@@ -307,24 +296,7 @@ export default function Example() {
                       id="address"
                       name="address"
                       autoComplete="street-address"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="apartment"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Apartment, suite, etc.
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      id="apartment"
-                      name="apartment"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -334,7 +306,7 @@ export default function Example() {
                     htmlFor="city"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    City
+                    Municipio
                   </label>
                   <div className="mt-1">
                     <input
@@ -342,7 +314,7 @@ export default function Example() {
                       id="city"
                       name="city"
                       autoComplete="address-level2"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -352,7 +324,7 @@ export default function Example() {
                     htmlFor="region"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    State / Province
+                    Departamento
                   </label>
                   <div className="mt-1">
                     <input
@@ -360,25 +332,7 @@ export default function Example() {
                       id="region"
                       name="region"
                       autoComplete="address-level1"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="postal-code"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Postal code
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      id="postal-code"
-                      name="postal-code"
-                      autoComplete="postal-code"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -390,7 +344,7 @@ export default function Example() {
                 id="billing-heading"
                 className="text-lg font-medium text-gray-900"
               >
-                Billing information
+                Información de Facturación
               </h2>
 
               <div className="mt-6 flex items-center">
@@ -399,28 +353,25 @@ export default function Example() {
                   name="same-as-shipping"
                   type="checkbox"
                   defaultChecked
-                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                  className="h-4 w-4 rounded border-gray-300 text-pink-500 focus:ring-cyan-500"
                 />
                 <div className="ml-2">
                   <label
                     htmlFor="same-as-shipping"
                     className="text-sm font-medium text-gray-900"
                   >
-                    Same as shipping information
+                    Igual que la información de Envio
                   </label>
                 </div>
               </div>
             </section>
 
-            <div className="mt-10 border-t border-gray-200 pt-6 sm:flex sm:items-center sm:justify-between">
-              <button
-                type="submit"
-                className="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:order-last sm:ml-6 sm:w-auto"
-              >
-                Continue
-              </button>
+            <div className="mt-10 border-t border-gray-200 pt-6 sm:flex sm:flex-col gap-2 sm:justify-between">
               <p className="mt-4 text-center text-sm text-gray-500 sm:mt-0 sm:text-left">
-                You won&apos;t be charged until the next step.
+                *Se enviaran los datos del pedido para ser procesados.
+              </p>
+              <p className="mt-4 text-center text-sm text-gray-500 sm:mt-0 sm:text-left">
+                *Unicamente se aceptaran ordenes dentro de Nicaragua.
               </p>
             </div>
           </div>

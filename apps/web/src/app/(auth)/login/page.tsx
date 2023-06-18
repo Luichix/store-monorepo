@@ -6,6 +6,7 @@ import { AuthLayout } from '@/components/layout';
 import { Button, TextField } from '@/components/common';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
+import SignInGoogle from '@/components/common/SignInGoogle';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -68,6 +69,10 @@ export default function Login() {
             Ingresar a la cuenta
           </Button>
         </form>
+        <div className="flex w-full p-4 text-md  justify-center ">
+          <p className="text-gray-600">ó </p>
+        </div>
+        <SignInGoogle />
       </AuthLayout>
     </>
   );

@@ -58,3 +58,51 @@ export interface Cart {
   userId: string;
   v?: string;
 }
+
+export interface OptionProps {
+  title: string;
+  value: string;
+}
+
+export interface CustomFilterProps {
+  title: string;
+  options: OptionProps[];
+}
+
+type Gender = 'M' | 'F';
+
+interface Section {
+  clothing?: Clothing[];
+  accessories?: Accesories[];
+  brand?: Brand[];
+}
+
+type Clothing =
+  | 'tops'
+  | 'dresses'
+  | 'pants'
+  | 'denim'
+  | 'sweaters'
+  | 'tshirts'
+  | 'jackets'
+  | 'sportswear';
+type Accesories =
+  | 'watches'
+  | 'portfolios'
+  | 'handbags'
+  | 'sunglasses'
+  | 'hats'
+  | 'belts';
+
+type Brand =
+  | 'fullnelson'
+  | 'my way'
+  | 'ReArranged'
+  | 'Falsification'
+  | 'significant couple';
+
+export interface Filter {
+  filter: boolean;
+  gender: Gender;
+  section: Section;
+}
