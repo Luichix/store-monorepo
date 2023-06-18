@@ -8,7 +8,9 @@
     "NEXTAUTH_URL",
     "API_TELEGRAM",
     "CHAT_ID_TELEGRAM",
-    "TOKEN_BOT_TELEGRAM"
+    "TOKEN_BOT_TELEGRAM",
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET"
   ],
   "pipeline": {
     "build": {

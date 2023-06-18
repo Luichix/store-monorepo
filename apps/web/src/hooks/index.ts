@@ -25,5 +25,5 @@ export const useFetchCartItems = (session) => {
           console.log(error);
         });
     }
-  }, [session]);
+  }, [session, updateCart]);
 };
