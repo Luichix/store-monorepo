@@ -43,7 +43,7 @@ export async function fetchCollection(filters: FilterProps) {
     state,
   } = filters;
 
-  const url = new URL(`${NEXT_URL}/api/collection`);
+  const url = new URL(`${NEXT_URL}/collection`);
 
   // Agregar los parámetros de filtro a la URL
   if (section) url.searchParams.append('section', section);
@@ -58,6 +58,7 @@ export async function fetchCollection(filters: FilterProps) {
   if (state) url.searchParams.append('state', state);
 
   const response = await fetch(url.toString());
+  console.log(response);
   // Procesar la respuesta y devolver los datos
   const data = await response.json();
   return data;
@@ -66,7 +67,7 @@ export async function fetchCollection(filters: FilterProps) {
 /* ------------------------------- fetch item ------------------------------- */
 
 export async function fetchItem(itemId: string) {
-  const res = await fetch(`${NEXT_URL}/api/collection/${itemId}`);
+  const res = await fetch(`${NEXT_URL}/collection/${itemId}`);
 
   // Recommendation: handle errors
   if (!res.ok) {
@@ -85,7 +86,7 @@ export async function fetchCart({
   id: string;
   authorization: string;
 }) {
-  const res = await fetch(`${NEXT_URL}/api/user/${id}`, {
+  const res = await fetch(`${NEXT_URL}/user/${id}`, {
     headers: {
       authorization,
       'Content-Type': 'application/json',

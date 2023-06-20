@@ -92,7 +92,6 @@ export default async function Collection({ searchParams }: CollectionProps) {
             </a>
           </div>
           <div className="hidden space-x-2 sm:flex">
-            {/* Current: "border-cyan-600 ring-1 ring-cyan-600", Default: "border-gray-300" */}
             <a
               href="#"
               className="inline-flex h-10 items-center rounded-md border border-gray-300 bg-white px-4 hover:bg-gray-100 focus:border-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:ring-opacity-25 focus:ring-offset-1 focus:ring-offset-cyan-600"
