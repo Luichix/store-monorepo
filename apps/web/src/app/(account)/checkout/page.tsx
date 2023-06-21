@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react';
 import { useFetchCartItems } from '@/hooks';
 import Link from 'next/link';
 import { confirmOrder } from '@/utils';
+import { BuildingStorefrontIcon, TruckIcon } from '@heroicons/react/24/outline';
 
 const products = [
   {
@@ -188,40 +189,13 @@ export default function Checkout() {
                 Información de Contacto
               </h2>
 
-              <div className="mt-6">
-                <label
-                  htmlFor="email-address"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Correo Electronico
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="email"
-                    id="email-address"
-                    name="email-address"
-                    autoComplete="email"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm"
-                  />
-                </div>
-              </div>
-            </section>
-
-            <section aria-labelledby="payment-heading" className="mt-10">
-              <h2
-                id="payment-heading"
-                className="text-lg font-medium text-gray-900"
-              >
-                Detalle de Pagos
-              </h2>
-
               <div className="mt-6 grid grid-cols-3 gap-x-4 gap-y-6 sm:grid-cols-4">
-                <div className="col-span-3 sm:col-span-4">
+                <div className="col-span-3 sm:col-span-2">
                   <label
                     htmlFor="name-on-card"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Nombre Completo
+                    Nombre
                   </label>
                   <div className="mt-1">
                     <input
@@ -239,7 +213,7 @@ export default function Checkout() {
                     htmlFor="card-number"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Documento de Identidad
+                    Apellidos
                   </label>
                   <div className="mt-1">
                     <input
@@ -269,6 +243,73 @@ export default function Checkout() {
                     />
                   </div>
                 </div>
+                <div className="col-span-3 sm:col-span-3">
+                  <label
+                    htmlFor="email-address"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Correo Electronico
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="email"
+                      id="email-address"
+                      name="email-address"
+                      autoComplete="email"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section aria-labelledby="payment-heading" className="mt-10">
+              <h2
+                id="payment-heading"
+                className="text-lg font-medium text-gray-900"
+              >
+                Forma de entrega
+              </h2>
+
+              <div className="mt-6 grid grid-cols-3 gap-x-4 gap-y-6 sm:grid-cols-4">
+                <div className="col-span-3 sm:col-span-3">
+                  <div className="flex w-full  border-2 rounded-md gap-2 justify-between  border-gray-200 p-1 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm">
+                    <label
+                      htmlFor="send-on-truck"
+                      className="flex items-center gap-2  text-sm font-medium text-gray-700"
+                    >
+                      <TruckIcon width={28} height={28} />
+                      Envio
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        type="radio"
+                        id="send-on-truck"
+                        name="send-on-truck"
+                        autoComplete="cc-name"
+                        className="border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm"
+                      />
+                    </div>
+                  </div>
+                  <div className=" mt-4 flex w-full rounded-md gap-2 justify-between border-2  border-gray-200 p-1 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm">
+                    <label
+                      htmlFor="pick-up-in-store"
+                      className="flex items-center gap-2  text-sm font-medium text-gray-700"
+                    >
+                      <BuildingStorefrontIcon width={28} height={28} />
+                      Retirar en la tienda
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        type="radio"
+                        id="pick-up-in-store"
+                        name="pick-up-in-store"
+                        autoComplete="cc-name"
+                        className="    border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -286,7 +327,24 @@ export default function Checkout() {
                     htmlFor="address"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Dirección 1
+                    País
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="text"
+                      id="address"
+                      name="address"
+                      autoComplete="street-address"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+                <div className="sm:col-span-3">
+                  <label
+                    htmlFor="address"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Dirección
                   </label>
                   <div className="mt-1">
                     <input
