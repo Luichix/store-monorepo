@@ -1,6 +1,7 @@
+import { generateCustomerOrder } from '@/lib/jspdf';
 import { verifyJwt } from '@/lib/jwt';
 import prisma from '@/lib/prisma';
-
+import Order from 'public/data/orden-dummies.json';
 interface RequestBody {
   userId: string;
 }
@@ -50,6 +51,8 @@ export async function POST(request: Request) {
     if (!sendMessage.ok) {
       throw new Error('Failed to send message to Telegram');
     }
+
+    generateCustomerOrder(Order);
 
     return new Response(JSON.stringify(sendMessage));
   } catch (error) {

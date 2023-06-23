@@ -17,8 +17,12 @@ function generarOrdenCompra(orden) {
   const FONT_BASE = 10;
   const FONT_HEAD = 12;
   const FONT_SUPER = 20;
+  const BORDER_WIDTH = 0.1;
+  const FOOT_COLUMN = 6;
+  const FILL_COLOR_TABLE = [240, 240, 240];
 
   const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
 
   const centerPage = pageWidth / 2;
   const startRigth = pageWidth - x;
@@ -165,22 +169,26 @@ function generarOrdenCompra(orden) {
   // Crea una matriz de datos para la tabla de artículos
   const data = [];
   data.push([
-    'Categoría',
-    'Sección',
+    'N°',
+    'Item',
     'Talla',
     'Descripción',
-    'Precio',
+    'Categoria',
     'Estado',
+    'Precio',
   ]);
+  let index = 1;
   for (const item of orden.items) {
     data.push([
-      item.items.category,
-      item.items.section,
+      index,
+      item.items.item,
       item.items.size || '-',
       item.items.description,
-      `$${item.items.price}`,
+      item.items.category,
       item.items.state,
+      `C$ ${item.items.price.toFixed(2)}`,
     ]);
+    index++;
   }
 
   // Agrega la tabla de artículos
@@ -188,33 +196,112 @@ function generarOrdenCompra(orden) {
     head: [data[0]],
     body: data.slice(1),
     startY: y,
-    margin: { top: 15 },
+    margin: { top: 15, bottom: 35 },
     styles: {
       fontSize: 10,
-      cellPadding: 5,
+      cellPadding: 2,
       valign: 'middle',
+      lineWidth: BORDER_WIDTH,
+      halign: 'center',
     },
     theme: 'plain',
     headStyles: {
-      fillColor: [240, 240, 240],
+      fillColor: FILL_COLOR_TABLE,
     },
+    columnStyles: {
+      6: {
+        halign: 'right',
+        cellPadding: { right: 4 },
+      },
+    },
+    footStyles: {
+      lineWidth: 0,
+    },
+    foot: [
+      [
+        {
+          content: 'Subtotal:',
+          colSpan: FOOT_COLUMN,
+          rowSpan: 1,
+          styles: {
+            halign: 'right',
+            cellPadding: { top: 2, left: 0, right: 4, bottom: 2 },
+          },
+        },
+        {
+          content: `C$ ${orden.subtotal.toFixed(2)}`,
+          styles: {
+            fillColor: FILL_COLOR_TABLE,
+            lineWidth: BORDER_WIDTH,
+            halign: 'right',
+            cellPadding: { right: 4 },
+          },
+        },
+      ],
+      [
+        {
+          content: 'Envio:',
+          colSpan: FOOT_COLUMN,
+          rowSpan: 1,
+          styles: {
+            halign: 'right',
+            cellPadding: { top: 2, left: 0, right: 4, bottom: 2 },
+          },
+        },
+        {
+          content: `C$ ${orden.envio.toFixed(2)}`,
+          styles: {
+            fontStyle: 'normal',
+            fillColor: FILL_COLOR_TABLE,
+            lineWidth: BORDER_WIDTH,
+            halign: 'right',
+            cellPadding: { right: 4 },
+          },
+        },
+      ],
+      [
+        {
+          content: 'Total:',
+          colSpan: FOOT_COLUMN,
+          rowSpan: 1,
+          styles: {
+            halign: 'right',
+            cellPadding: { top: 2, left: 0, right: 4, bottom: 2 },
+          },
+        },
+        {
+          content: `C$ ${orden.total.toFixed(2)}`,
+          styles: {
+            fillColor: FILL_COLOR_TABLE,
+            lineWidth: BORDER_WIDTH,
+            halign: 'right',
+            cellPadding: { right: 4 },
+          },
+        },
+      ],
+    ],
   });
 
   // Agrega la información adicional
-  y = doc.autoTable.previous.finalY + 15;
   doc.setFontSize(FONT_BASE);
-  doc.text(`Subtotal: $${orden.subtotal}`, x, y);
-  y += 7;
-  doc.text(`Envío: $${orden.envio}`, x, y);
-  y += 7;
-  doc.text(`Impuestos: $${orden.impuestos}`, x, y);
-  y += 7;
-  doc.text(`Total: $${orden.total}`, x, y);
-  y += 10;
-  doc.text(`Instrucciones Especiales: ${orden.instrucciones}`, x, y);
+
+  const finalTable = doc.autoTable.previous.finalY + 40;
+  const finalPage = pageHeight - 25;
+
+  if (finalTable <= finalPage) {
+    y = doc.autoTable.previous.finalY + 20;
+  } else {
+    y = pageHeight - 40;
+  }
+  doc.setFont('helvetica', 'bold');
+  doc.text('Instrucciones Especiales:', x, y);
+  y += 5;
+  doc.setFont('helvetica', 'normal');
+  doc.text(`- ${orden.instrucciones}`, x, y);
 
   // Agrega el agradecimiento
-  y += 20;
+  y = pageHeight - 25;
+  doc.setFont('helvetica', 'bold');
   doc.setFontSize(FONT_HEAD);
   doc.text('¡Gracias por tu compra!', centerPage, y, { align: 'center' });
   y += 7;
